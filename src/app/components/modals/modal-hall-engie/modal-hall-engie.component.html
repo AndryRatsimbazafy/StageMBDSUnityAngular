@@ -1,0 +1,43 @@
+<div class="s-modal" style="height: 80vh">
+    <div class="s-modal-header">
+      <h3>Pdf</h3>
+      <button mat-button class="close-btn" (click)="closeModal()">
+        <mat-icon>close</mat-icon>
+      </button>
+    </div>
+  
+    <div class="row s-modal-body">
+  
+      <mat-tab-group>
+        <mat-tab label="Engie Home Service">
+          <div class="grid-items">
+            <div
+              class="grid-element"
+              *ngFor="let file of data.engiHomeService; let i = index"
+              style="display: grid"
+            >
+              <iframe [src]="file"></iframe>
+              <button mat-stroked-button (click)="openInNewTab(file)">
+                Voir
+              </button>
+            </div>
+          </div>
+        </mat-tab>
+        <mat-tab label="Engie">
+          <div class="grid-items">
+            <div
+              class="grid-element"
+              *ngFor="let file of data.engie; let i = index"
+              style="display: grid"
+            >
+              <iframe [src]="file"></iframe>
+              <button mat-stroked-button (click)="openInNewTab(file)">
+                Voir
+              </button>
+            </div>
+          </div>
+        </mat-tab>
+      </mat-tab-group>
+    </div>
+  </div>
+  

@@ -1,0 +1,67 @@
+<div class="s-modal" style="height: 80vh">
+  <div class="s-modal-header">
+    <h3>Galerie</h3>
+    <button mat-button class="close-btn" (click)="closeModal()">
+      <mat-icon>close</mat-icon>
+    </button>
+  </div>
+
+  <div class="row s-modal-body">
+
+    <mat-tab-group>
+      <mat-tab label="Images">
+        <div class="grid-items">
+          <div class="grid-element" *ngFor="let url of data.listGalleries">
+            <img
+              #image
+              id="myImg"
+              [src]="url"
+              alt=""
+              (click)="openImageModal(url)"
+            />
+
+            <div #modal id="myModal" class="modal">
+              <span #close class="close" (click)="closeImageModal()"
+                >&times;</span
+              >
+              <img #imageModal class="modal-content" id="img01" />
+            </div>
+          </div>
+        </div>
+      </mat-tab>
+      <mat-tab label="Flyers">
+        <div class="grid-items">
+          <div
+            class="grid-element"
+            *ngFor="let file of data.listFlyers; let i = index"
+            style="display: grid"
+          >
+            <iframe [src]="file"></iframe>
+            <button mat-stroked-button (click)="openInNewTab(file)">
+              Voir
+            </button>
+          </div>
+        </div>
+      </mat-tab>
+      <mat-tab label="Videos">
+        <div class="grid-items" style="grid-template-columns: repeat(2, 1fr)">
+          <div
+            class="grid-element"
+            *ngFor="let file of data.listVideos; let i = index"
+          >
+            <video
+              loop
+              muted
+              class="library"
+              controls
+              data-config="some-js-object-here"
+              style="height: 12em"
+            >
+              <source [src]="file" type="video/mp4" />
+            </video>
+          </div>
+        </div>
+      </mat-tab>
+    </mat-tab-group>
+  </div>
+</div>

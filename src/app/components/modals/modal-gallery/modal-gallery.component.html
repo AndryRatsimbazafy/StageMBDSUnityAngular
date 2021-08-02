@@ -1,0 +1,34 @@
+<div class="s-modal salon-modal">
+
+      <button mat-button class="close-btn" (click)="closeModal()">
+      <mat-icon>close</mat-icon>
+    </button>
+  <button class="fullscreen" mat-button (click)="toggleFullScreen()">
+    <mat-icon *ngIf="!isFullScreen">open_in_full</mat-icon>
+    <mat-icon *ngIf="isFullScreen">close_fullscreen</mat-icon>
+  </button>
+  <div class="s-modal-header">
+    <h3>Images</h3>
+  </div>
+  <div class="container s-modal-body">
+
+    <div class="row">
+      <div class="grid-element col-xl-3" *ngFor="let url of data.urls">
+        <img class="img-fluid"
+          #image
+          id="myImg"
+          [src]="url"
+          alt=""
+          (click)="openImageModal(url)"
+        />
+
+        <div #modal id="myModal" class="modal">
+          <span #close class="close" (click)="closeImageModal()">&times;</span>
+          <img #imageModal class="modal-content img-fluid contentImgModal" id="img01" style="height: auto;width: auto;object-fit: inherit;margin-left: auto;margin-right: auto;" />
+        </div>
+
+      </div>
+    </div>
+
+  </div>
+</div>

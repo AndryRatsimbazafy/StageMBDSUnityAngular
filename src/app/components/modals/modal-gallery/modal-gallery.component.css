@@ -1,0 +1,15 @@
+.fullscreen {
+  float: right;
+}
+
+.container.s-modal-body {
+  max-width: 100% !important;
+}
+
+.close-btn {
+  float: right;
+}
+
+.contentImgModal {
+  margin: 10% auto;
+}

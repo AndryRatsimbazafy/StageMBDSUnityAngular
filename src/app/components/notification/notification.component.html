@@ -1,0 +1,8 @@
+<div>
+    <div [ngStyle]="{'color': snackbarConfig.textColor}" style="display: flex; justify-content: space-between; margin-bottom: -15px;">
+        <p>{{data.message}}</p>
+        <mat-icon aria-hidden="false" (click)="onCloseSnackbar()">
+            close
+        </mat-icon>
+    </div>
+</div>

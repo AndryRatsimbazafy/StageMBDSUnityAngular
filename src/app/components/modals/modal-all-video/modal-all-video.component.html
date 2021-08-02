@@ -1,0 +1,28 @@
+<div class="s-modal" style="width: 50vw; height: 50vh">
+    <button mat-button class="close-btn" (click)="closeModal()">
+      <mat-icon>close</mat-icon>
+    </button>
+    <div class="s-modal-header">
+      <h2>Vidéos</h2>
+      <!--
+      <button *ngIf="!loading" mat-stroked-button style="float: right" (click)="visiterNotreStand()">Visiter notre stand</button>
+      <mat-spinner *ngIf="loading" [diameter]='30'></mat-spinner>
+      -->
+    </div>
+    <div class="clearfix"></div>
+
+    <div class="row s-modal-body">
+      <mat-tab-group style="width: 50vw; height: 48vh">
+        <mat-tab label="Videos">
+            <div class="grid-items">
+              <div *ngFor="let file of data.listVideos; let i = index">
+                <video loop muted autoplay oncanplay="this.play()" class="library" controls preload="auto" data-config="some-js-object-here" style="max-width: 12vw;">
+                    <source [src]="file" type='video/mp4'>
+                </video>
+              </div>
+            </div>
+        </mat-tab>
+      </mat-tab-group>
+    </div>
+  </div>
+

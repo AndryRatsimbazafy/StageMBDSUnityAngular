@@ -1,0 +1,39 @@
+<div class="s-modal" style="height: 80vh">
+  <div class="s-modal-header">
+
+    <div style="display: flex; justify-content: space-between;">
+      <h3>Galerie</h3>
+      <button
+        *ngIf="!loading"
+        mat-stroked-button
+        style="
+        background-color: white;
+        border: 2px solid;
+        margin-left: 1em;
+        right: 3em;"
+        (click)="visiterNotreStand()"
+      >
+        Visiter notre stand
+      </button>
+      <mat-spinner *ngIf="loading" [diameter]="30"></mat-spinner>
+    </div>
+
+    <button mat-button class="close-btn" (click)="closeModal()">
+      <mat-icon>close</mat-icon>
+    </button>
+  </div>
+
+  <div class="row s-modal-body" style="margin-top: 1em;">
+
+    <div class="grid-items">
+      <div
+        class="grid-element"
+        *ngFor="let file of data.listFlyers; let i = index"
+        style="display: grid"
+      >
+        <iframe [src]="file"></iframe>
+        <button mat-stroked-button (click)="openInNewTab(file)">Voir</button>
+      </div>
+    </div>
+  </div>
+</div>

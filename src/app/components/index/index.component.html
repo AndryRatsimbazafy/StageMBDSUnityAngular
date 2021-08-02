@@ -1,0 +1,169 @@
+<nav class="navbar navbar-light navbar-expand bg-light navigation-clean">
+  <div class="container"><img class="logo" src="assets/img/logo.png" /></div>
+</nav>
+<header class="text-center text-white masthead particle container-fluid">
+  <div class="overlay">
+    <div id="particles-js"></div>
+  </div>
+
+  <div class="container contentLogin">
+    <div class="row">
+      <div class="col-xl-7">
+        <h1 class="mb-5">
+          <strong>Bienvenue au Salon Virtuel de la</strong
+          ><br />Rénovation<br />
+        </h1>
+        <app-timer></app-timer>
+      </div>
+      <div class="col-xl-5">
+        <mat-card class="shadow-lg" style="z-index: 1">
+          <form [formGroup]="AccountForm" (ngSubmit)="onCustomAction()" *ngIf="!forgotmode">
+            <mat-card-content class="justify-content-center d-flex flex-column">
+              <mat-form-field appearance="fill" color="accent">
+                <mat-label>Adresse email</mat-label>
+                <input matInput type="email" formControlName="email" />
+                <button mat-icon-button matSuffix>
+                  <mat-icon>people</mat-icon>
+                </button>
+              </mat-form-field>
+
+              <mat-form-field appearance="fill" color="accent">
+                <mat-label>Mot de passe</mat-label>
+                <input
+                  matInput
+                  [type]="hide ? 'password' : 'text'"
+                  formControlName="password"
+                />
+                <button
+                  mat-icon-button
+                  matSuffix
+                  (click)="hide = !hide"
+                  type="button"
+                  [attr.aria-label]="'Hide password'"
+                  [attr.aria-pressed]="hide"
+                >
+                  <mat-icon>{{
+                    hide ? "visibility_off" : "visibility"
+                  }}</mat-icon>
+                </button>
+              </mat-form-field>
+            </mat-card-content>
+            <mat-card-actions style="display: flex; justify-content: center">
+              <mat-spinner [diameter]="35" *ngIf="loading"></mat-spinner>
+              <button
+                *ngIf="!loading"
+                mat-raised-button
+                color="primary"
+                class="btn-start px-3 py-2 w-75"
+                type="submit"
+              >
+                LANCER
+              </button>
+            </mat-card-actions>
+            <p class="text-danger text-center">
+              {{ loginError ? loginError.error : "" }}
+            </p>
+            <button mat-button color="accent" (click)="forgotmode = !forgotmode">Mot de passe oublié?</button>
+          </form>
+
+          <!-- FORGET -->
+          <form [formGroup]="ForgotForm" (ngSubmit)="forgetAction()" *ngIf="forgotmode">
+            <mat-card-content class="justify-content-center d-flex flex-column">
+              <mat-form-field appearance="fill" color="accent">
+                <mat-label>Adresse email</mat-label>
+                <input matInput type="email" formControlName="email" />
+                <button mat-icon-button matSuffix>
+                  <mat-icon>people</mat-icon>
+                </button>
+              </mat-form-field>
+            </mat-card-content>
+            <mat-card-actions style="display: flex; justify-content: center">
+              <mat-spinner [diameter]="35" *ngIf="loading"></mat-spinner>
+              <button
+                *ngIf="!loading"
+                mat-raised-button
+                color="primary"
+                class="btn-start px-3 py-2 w-75"
+                type="submit"
+              >
+                REINITIALISER
+              </button>
+            </mat-card-actions>
+            <p class="text-danger text-center">
+              {{ loginError ? loginError.error : "" }}
+            </p>
+            <button mat-button color="accent" (click)="forgotmode = !forgotmode">Se connecter</button>
+          </form>
+          <!-- end FORGET -->
+
+        </mat-card>
+      </div>
+    </div>
+  </div>
+</header>
+<section class="text-center features-icons">
+  <div class="container">
+    <div class="row">
+      <div class="col-lg-4">
+        <div class="card tips">
+          <div class="content-mouse">
+            <img src="assets/img/icons8-left-click-100.png" />
+          </div>
+          <div class="card-body d-flex flex-column">
+            <div>
+              <h4
+                style="
+                  font-family: 'Source Sans Pro', sans-serif;
+                  font-weight: 700;
+                "
+              >
+                <strong>DÉPLACEMENT ET INTERACTION</strong><br />
+              </h4>
+              <p>Cliquez le bouton gauche de votre souris</p>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="col-lg-4">
+        <div class="card tips">
+          <div class="content-mouse">
+            <img src="assets/img/icons8-mouse-100.png" />
+          </div>
+          <div class="card-body d-flex flex-column">
+            <div>
+              <h4
+                style="
+                  font-family: 'Source Sans Pro', sans-serif;
+                  font-weight: 700;
+                "
+              >
+                <strong>MOUVEMENT</strong><br /><strong>DE CAMERA</strong><br />
+              </h4>
+              <p>Bougez votre souris de bas en haut ou de gauche à droite</p>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="col-lg-4">
+        <div class="card tips">
+          <div class="content-mouse">
+            <img src="assets/img/icons8-mouse-right-click-100.png" />
+          </div>
+          <div class="card-body d-flex flex-column">
+            <div>
+              <h4
+                style="
+                  font-family: 'Source Sans Pro', sans-serif;
+                  font-weight: 700;
+                "
+              >
+                <strong>VEROUILLAGE ET DEVEROUILLAGE CAMERA</strong><br />
+              </h4>
+              <p>Cliquez sur le bouton droit de votre souris</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>

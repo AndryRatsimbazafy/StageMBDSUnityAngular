@@ -1,0 +1,6 @@
+.fullscreen {
+  float: right;
+}
+.container.s-modal-body{
+  max-width: 100%!important;
+}

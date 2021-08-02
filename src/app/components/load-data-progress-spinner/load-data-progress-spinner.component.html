@@ -1,0 +1,8 @@
+<mat-card class="example-card" [style.backgroundColor]="'black'">
+    <mat-card-header>
+        <mat-spinner diameter="40" aria-label="Rating"></mat-spinner>
+        <div style="margin-top: 10px; margin-left: 20px; margin-right: 20px;">
+            <h3 style="color: white;">Chargement des données<span *ngIf="progress > 0"> {{ progress }} %</span></h3>
+        </div>
+    </mat-card-header>
+</mat-card>

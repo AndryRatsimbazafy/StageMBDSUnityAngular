@@ -1,0 +1,34 @@
+<div class="s-modal-header"  style="display: flex; justify-content: space-between;">
+  <h3>Commerciaux</h3>
+  <button mat-button class="close-btn" (click)="closeModal()">
+    <mat-icon>close</mat-icon>
+  </button>
+</div>
+
+<ol class="gradient-list">
+  <li *ngFor="let com of data.commercial">
+    <div style="display: grid">
+<!--      <div>-->
+<!--        {{ com?.user_id?.companyName }}-->
+<!--      </div>-->
+      <div style="display: flex">
+        <div style="display: grid; margin-right: 0.5em">
+          {{ com?.user_id?.firstName }} {{ com?.user_id?.lastName }}
+<!--          <p style="font-size: smaller; color: #847f7f">-->
+<!--            {{ com?.user_id?.email }}-->
+<!--          </p>-->
+        </div>
+        <div *ngIf="!com?.user_id?.connected">
+          <div class="bubble">
+            <span class="bubble-outer-dot">
+              <span class="bubble-inner-dot"></span>
+            </span>
+          </div>
+        </div>
+      </div>
+      <div>
+          <button mat-raised-button (click)="chat(com?.user_id?._id)">Contacter</button>
+      </div>
+    </div>
+  </li>
+</ol>

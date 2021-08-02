@@ -1,0 +1,16 @@
+.chat {
+    height: 80vh;
+    background: #FFF;
+}
+
+.main {
+    height: 77%;
+}
+
+.send {
+    height: 10%;
+}
+
+.info {
+    height: 9%;
+}

@@ -1,0 +1,10 @@
+<h2 mat-dialog-title>{{ data.companyName }} - Video</h2>
+<div mat-dialog-content>
+    <div class="video-player-wrapper">
+
+        <video loop muted autoplay oncanplay="this.play()" class="library" controls preload="auto" data-config="some-js-object-here">
+            <source [src]="data.url" type='video/mp4'>
+        </video>
+
+    </div>
+</div>

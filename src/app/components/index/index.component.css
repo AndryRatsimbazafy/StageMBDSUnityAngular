@@ -1,0 +1,117 @@
+/* #carousel_f544 {
+    width: 100vw;
+    height: 100vh;
+    background-image: url('/assets/salon.png');
+    background-repeat: no-repeat;
+    background-size: 100% 100%;
+    opacity: 0.65;
+    margin-left: -1%;
+    margin-top: -1%;
+} */
+
+mat-card {
+  width: 436px;
+}
+
+mat-card.mat-form-field {
+  width: 80%;
+  margin: auto;
+}
+
+.btn-start {
+  font-weight: 700;
+  background-color: #cb3a5f;
+}
+
+#particles-js {
+  position: absolute;
+  background-size: cover;
+  z-index: -1;
+  width: 100%;
+  height: 100%;
+  background: rgb(255, 255, 255) linear-gradient(90deg, #c01821, #cd3d7e) no-repeat 50% 50%;
+}
+
+h3 {
+  font-size: 25px;
+}
+
+
+.features-icons-icon img {
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.features-icons-icon {
+  margin-bottom: 3rem;
+}
+
+.navbar-brand img {
+  max-width: 13rem;
+}
+
+.masthead.particle.container-fluid {
+  background: linear-gradient(90deg, #c01821, #cd3d7e), rgb(255, 255, 255, 1);
+  padding-top: 6rem;
+  padding-bottom: 4rem;
+}
+
+.card-body {
+  height: 190px;
+  background-color: #ce4084;
+}
+
+.card-body h4 {
+  font-size: 1rem;
+  color: #000000;
+}
+
+.content-mouse {
+  width: 100%;
+  height: 200px;
+  background: #ffffff;
+  border-top-left-radius: 12px;
+  border-top-right-radius: 12px;
+}
+
+.content-mouse img {
+  margin-top: 3rem;
+}
+
+.card.tips {
+  width: 18rem;
+  border-radius: 12px;
+  /*border-top-left-radius: 20px;*/
+  /*border-top-right-radius: 20px;*/
+  /*border-bottom-right-radius: 20px;*/
+  /*border-bottom-left-radius: 20px;*/
+  box-shadow: 5px 5px 16px 4px rgba(0, 0, 0, 0.2);
+  margin: 1em;
+  min-width: 280px;
+  max-width: 300px;
+  margin-bottom: 20px;
+  border-style: none;
+}
+
+.logo {
+  max-width: 480px;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+@media (min-width: 768px) {
+  header.masthead h1 {
+    font-size: 3.7rem;
+    text-transform: uppercase;
+  }
+}
+
+.card-body p {
+  font-family: 'Source Sans Pro', sans-serif;
+  color: #ffffff;
+  margin-top: 16px;
+}
+
+.contentLogin p {
+  font-size: 13px;
+}

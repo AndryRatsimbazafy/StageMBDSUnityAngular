@@ -1,0 +1,293 @@
+/* Style the Image Used to Trigger the Modal */
+#myImg {
+  border-radius: 5px;
+  cursor: pointer;
+  transition: 0.3s;
+}
+
+#myImg:hover {
+  opacity: 0.7;
+}
+
+/* The Modal (background) */
+.modal {
+  display: none; /* Hidden by default */
+  position: fixed; /* Stay in place */
+  z-index: 1; /* Sit on top */
+  padding-top: 100px; /* Location of the box */
+  left: 0;
+  top: 0;
+  width: 100%; /* Full width */
+  height: 100%; /* Full height */
+  overflow: auto; /* Enable scroll if needed */
+  background-color: rgb(0, 0, 0); /* Fallback color */
+  background-color: rgba(0, 0, 0, 0.9); /* Black w/ opacity */
+}
+
+/* Modal Content (Image) */
+.modal-content {
+  margin: auto;
+  display: block;
+  width: 100%;
+  max-width: 700px;
+}
+
+/* Caption of Modal Image (Image Text) - Same Width as the Image */
+#caption {
+  margin: auto;
+  display: block;
+  width: 100%;
+  max-width: 700px;
+  text-align: center;
+  color: #ccc;
+  padding: 10px 0;
+  height: 150px;
+}
+
+/* Add Animation - Zoom in the Modal */
+.modal-content, #caption {
+  animation-name: zoom;
+  animation-duration: 0.6s;
+}
+
+@keyframes zoom {
+  from {
+    transform: scale(0)
+  }
+  to {
+    transform: scale(1)
+  }
+}
+
+/* The Close Button */
+.close {
+  position: absolute;
+  top: 15px;
+  right: 35px;
+  color: #f1f1f1;
+  font-size: 40px;
+  font-weight: bold;
+  transition: 0.3s;
+}
+
+.close:hover,
+.close:focus {
+  color: #bbb;
+  text-decoration: none;
+  cursor: pointer;
+}
+
+/* 100% Image Width on Smaller Screens */
+@media only screen and (max-width: 700px) {
+  .modal-content {
+    width: 100%;
+  }
+}
+
+.spinner {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  background: rgba(0, 0, 0, 0.6);
+}
+
+/*begin-variables base-font-size*/
+html {
+  font-size: 16px;
+}
+
+/*end-variables base-font-size*/
+
+
+/* #carousel_f544 {
+    width: 100vw;
+    height: 100vh;
+    background-image: url('/assets/salon.png');
+    background-repeat: no-repeat;
+    background-size: 100% 100%;
+    opacity: 0.65;
+    margin-left: -1%;
+    margin-top: -1%;
+} */
+
+mat-card {
+  width: 436px;
+}
+
+mat-card.mat-form-field {
+  width: 80%;
+  margin: auto;
+}
+
+.btn-start {
+  font-weight: 700;
+  background-color: #cb3a5f;
+}
+
+#particles-js {
+  position: absolute;
+  background-size: cover;
+  z-index: -1;
+  width: 100%;
+  height: 100%;
+  background: rgb(255, 255, 255) linear-gradient(90deg, #c01821, #cd3d7e) no-repeat 50% 50%;
+}
+
+h3 {
+  font-size: 25px;
+}
+
+
+.features-icons-icon img {
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.features-icons-icon {
+  margin-bottom: 3rem;
+}
+
+.navbar-brand img {
+  max-width: 13rem;
+}
+
+.masthead.particle.container-fluid {
+  background: linear-gradient(90deg, #c01821, #cd3d7e), rgb(255, 255, 255, 1);
+  padding-top: 6rem;
+  padding-bottom: 4rem;
+}
+
+.card-body {
+  height: 190px;
+  background-color: #ce4084;
+}
+
+.card-body h4 {
+  font-size: 1rem;
+  color: #000000;
+}
+
+.content-mouse {
+  width: 100%;
+  height: 200px;
+  background: #ffffff;
+  border-top-left-radius: 12px;
+  border-top-right-radius: 12px;
+}
+
+.content-mouse img {
+  margin-top: 3rem;
+}
+
+.card.tips {
+  width: 18rem;
+  border-radius: 12px;
+  /*border-top-left-radius: 20px;*/
+  /*border-top-right-radius: 20px;*/
+  /*border-bottom-right-radius: 20px;*/
+  /*border-bottom-left-radius: 20px;*/
+  box-shadow: 5px 5px 16px 4px rgba(0, 0, 0, 0.2);
+  margin: 1em;
+  min-width: 280px;
+  max-width: 300px;
+  margin-bottom: 20px;
+  border-style: none;
+}
+
+.logo {
+  max-width: 480px;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+@media (min-width: 768px) {
+  header.masthead h1 {
+    font-size: 3.7rem;
+    text-transform: uppercase;
+  }
+}
+
+.card-body p {
+  font-family: 'Source Sans Pro', sans-serif;
+  color: #ffffff;
+  margin-top: 16px;
+}
+
+.contentLogin p {
+  font-size: 13px;
+}
+
+.sceneLoading {
+  position: absolute;
+  top: 0px;
+  width: 100%;
+  height: 100vh;
+  background-color: #ffffff;
+}
+
+#content-unity {
+  width: 100%;
+  height: 100vh;
+  overflow: hidden;
+}
+
+#menu_imagenes {
+  background-color: #ffffff;
+  max-width: 84vw;
+  left: inherit;
+  width: 100%;
+  display: none;
+  padding: 1em;
+  z-index: 999;
+}
+
+#menu_imagenes .row {
+
+}
+
+#menu_imagenes a {
+  cursor: pointer;
+}
+
+#menu_imagenes a, #menu_imagenes svg {
+  width: 2rem;
+  height: 2rem;
+}
+
+.dropdown-menu ul li {
+  display: table-cell;
+  text-align: center;
+}
+
+.dropdown-menu.show {
+  left: -4vw !important;
+  top: -0.50vw !important;
+}
+
+.dropdown-menu ul {
+  padding: 0;
+}
+
+#menu_imagenes .dropdown-menu svg {
+  width: 2rem;
+}
+
+
+.logout{
+  position: fixed;
+  top: 1em;
+  left: 150px;
+  background: white;
+  width: 120px;
+  height: 120px;
+  /* font-size: 2em; */
+  border-radius: 50%;
+  color: black;
+}
+
+.logout mat-icon{
+  font-size: 70px;
+  width: 70px;
+  height: 70px;
+}

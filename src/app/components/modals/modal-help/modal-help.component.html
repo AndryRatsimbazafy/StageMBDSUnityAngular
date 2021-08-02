@@ -1,0 +1,141 @@
+<div class="s-modal">
+
+    <div>
+        <div>
+            <button mat-button class="close-btn" (click)="closeModal()">
+                <mat-icon>close</mat-icon>
+            </button>
+            <div class="s-modal-header">
+                <h2 style="margin-top: -0.5%;">Aide et FAQ</h2>
+            </div>
+            <div mat-dialog-content style="display: grid;">
+                <section #help>
+
+                    <!-- Mouvement -->
+                    <details style="margin-top: -3.5%;" (clcick)="toggleAcordionSection(0)" open>
+                        <summary class="clearfix">
+                            Mouvement et Camera
+                        </summary>
+                        <div>
+                            <div style="display: flex; width: -webkit-fill-available;">
+                                <div>
+                                    <video loop muted class="library" controls
+                                        preload="auto" data-config="some-js-object-here">
+                                        <source
+                                            src="/assets/Tutorial Salon 1.mp4"
+                                            type='video/mp4'>
+                                    </video>
+                                </div>
+
+                                <div style="display: grid;margin-left: 1em;">
+
+                                    <div class="container">
+                                        <h2>Mouvement et Camera</h2>
+                                        <div class="accordion" #accordionMovement>
+                                            <div class="accordion-item">
+                                                <button (click)="toggleAccordion(0, 'movement')" id="accordion-button-3"
+                                                    aria-expanded="false"><span class="accordion-title">Comment faire pour vérouiller ou dévérouiller la caméra?</span><span class="icon"
+                                                        aria-hidden="true"></span></button>
+                                                <div class="accordion-content">
+                                                    <p>La caméra se vérouille automatiquement au départ de l'application. Utilisez le clic droit de la souris pour vérouiller ou dévérouiller
+                                                        la caméra.</p>
+                                                </div>
+                                            </div>
+                                            <div class="accordion-item">
+                                                <button (click)="toggleAccordion(1, 'movement')" id="accordion-button-2"
+                                                    aria-expanded="false"><span class="accordion-title">Comment faire pour controller la caméra?</span><span class="icon"
+                                                        aria-hidden="true"></span></button>
+                                                <div class="accordion-content">
+                                                    <p>Utilisez la souris pour controller la caméra lorsqu'elle n'est pas vérouillée.</p>
+                                                </div>
+                                            </div>
+                                            <div class="accordion-item">
+                                                <button (click)="toggleAccordion(2, 'movement')" id="accordion-button-1"
+                                                    aria-expanded="false"><span class="accordion-title">Comment fait on pour se déplacer?</span><span class="icon"
+                                                        aria-hidden="true"></span></button>
+                                                <div class="accordion-content">
+                                                    <p>Utilisez le clic gauche de votre souris et cliquez sur un endroit au
+                                                        sol pour vous déplacez.</p>
+                                                </div>
+                                            </div>
+                                            <div class="accordion-item">
+                                                <button (click)="toggleAccordion(3, 'movement')" id="accordion-button-1"
+                                                    aria-expanded="false"><span class="accordion-title">Comment interagir avec les objets?</span><span class="icon"
+                                                        aria-hidden="true"></span></button>
+                                                <div class="accordion-content">
+                                                    <p>Cliquez avec le clic gauche sur les objets interactifs (écran, galleire, pdf, commerciaux) 
+                                                        pour effectuer une action.</p>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </details>
+
+                    <!-- GALLERY -->
+                    <details style="margin-top: -0.5%;" (clcick)="toggleAcordionSection(1)" open>
+                        <summary class="clearfix">
+                            Minimap et Map
+                        </summary>
+                        <div>
+                            <div style="display: flex; width: -webkit-fill-available;">
+                                <div>
+                                    <video loop muted class="library" controls
+                                        preload="auto" data-config="some-js-object-here">
+                                        <source
+                                            src="/assets/Tutorial Salon 2.mp4"
+                                            type='video/mp4'>
+                                    </video>
+                                </div>
+
+                                <div style="display: grid;margin-left: 1em;">
+
+                                    <div class="container">
+                                        <h2>Minimap et Map</h2>
+                                        <div class="accordion" #accordionMap>
+                                            <div class="accordion-item">
+                                                <button (click)="toggleAccordion(0, 'map')" id="accordion-button-1"
+                                                    aria-expanded="false"><span class="accordion-title">Comment fait on pour faire apparaitre la map des stands?</span><span class="icon"
+                                                        aria-hidden="true"></span></button>
+                                                <div class="accordion-content">
+                                                    <p>Cliquez sur la minimap en bas à droite pour afficher tous les stands en mode map.</p>
+                                                </div>
+                                            </div>
+                                            <div class="accordion-item">
+                                                <button (click)="toggleAccordion(1, 'map')" id="accordion-button-2"
+                                                    aria-expanded="false"><span class="accordion-title">Comment aller rapidement vers un stand depuis la carte des stands?</span><span class="icon"
+                                                        aria-hidden="true"></span></button>
+                                                <div class="accordion-content">
+                                                    <p>Utilisez la souris pour choisir le stand voulu, cliquez sur le stand de votre choix en surbrillance pour y accéder rapidement.</p>
+                                                </div>
+                                            </div>
+                                            <div class="accordion-item">
+                                                <button (click)="toggleAccordion(2, 'map')" id="accordion-button-3"
+                                                    aria-expanded="false"><span class="accordion-title">Comment quitter la vue carte des stands?</span><span class="icon"
+                                                        aria-hidden="true"></span></button>
+                                                <div class="accordion-content">
+                                                    <p>Appuyez sur la touche ESC (echap) pour quittez cette vue.</p>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </details>
+
+                </section>
+
+            </div>
+
+            <!-- Buttons -->
+            <div style="display: flex; justify-content: space-between;">
+                <div mat-dialog-actions>
+
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

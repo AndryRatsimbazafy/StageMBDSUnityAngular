@@ -1,0 +1,26 @@
+<div class="s-modal salon-modal">
+
+      <button mat-button class="close-btn" (click)="closeModal()">
+      <mat-icon>close</mat-icon>
+    </button>
+  <button mat-button class="fullscreen" (click)="toggleFullScreen()">
+    <mat-icon *ngIf="!isFullScreen">open_in_full</mat-icon>
+    <mat-icon *ngIf="isFullScreen">close_fullscreen</mat-icon>
+  </button>
+  <div class="s-modal-header">
+    <h3>Flyers</h3>
+
+  </div>
+  <div class="row s-modal-body">
+    <div class="grid-items">
+      <div
+        class="grid-element"
+        style="display: grid"
+        *ngFor="let file of data.urls; let i = index"
+      >
+        <iframe [src]="file"></iframe>
+        <button mat-stroked-button (click)="openInNewTab(file)">Voir</button>
+      </div>
+    </div>
+  </div>
+</div>

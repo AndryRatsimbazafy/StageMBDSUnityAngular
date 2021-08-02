@@ -1,0 +1,39 @@
+<div class="s-modal salon-modal">
+  <div class="s-modal-header" style="display: flex; justify-content: space-between;">
+    <h3>Email</h3>
+    <button mat-button class="close-btn" (click)="closeModal()">
+      <mat-icon>close</mat-icon>
+    </button>
+  </div>
+  <div class="row s-modal-body">
+    <div class="container">
+      <form class="mail-form" [formGroup]="form" (ngSubmit)="onSubmit()" style="margin-top: 2em;">
+        
+        <p style="margin-bottom: 1em;"><b>Destinataire : </b> {{ exposantEmail }}</p>
+        <p style="margin-bottom: 1em;"><b>Votre email : </b> {{ visiteurEmail }}</p>
+
+        <mat-form-field class="mail-full-width">
+          <mat-label>Objet du mail</mat-label>
+          <input matInput readonly value="Salon de la Rénovation" />
+        </mat-form-field>
+
+        <angular-editor [placeholder]="'Enter text here...'" formControlName="content" [config]="editorConfig"></angular-editor>
+
+        <mat-spinner [diameter]="35" *ngIf="loading || !exposantEmail || !visiteurEmail"></mat-spinner>
+        <button
+          mat-raised-button
+          color="primary"
+          class="p-2"
+          type="submit"
+          *ngIf="!loading && exposantEmail && visiteurEmail"
+          style="float: right; width: 12em"
+        >
+          Envoyer
+        </button>
+        <p class="text-danger text-center">
+          {{ errorMessage ? errorMessage : "" }}
+        </p>
+      </form>
+    </div>
+  </div>
+</div>
