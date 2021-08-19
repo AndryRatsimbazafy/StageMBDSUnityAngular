@@ -61,7 +61,7 @@ import {ModalAllMediaComponent} from './components/modals/modal-all-media/modal-
 import {DataService} from './services/data.service';
 import {ModalAllVideoComponent} from './components/modals/modal-all-video/modal-all-video.component';
 import {ModalChoixSceneComponent} from './components/modals/modal-choix-scene/modal-choix-scene.component';
-import {PreviewCardComponent} from './@shared/preview-card/preview-card.component';
+import {PreviewCardComponent} from './shared/preview-card/preview-card.component';
 import {CrystalLightboxModule} from '@crystalui/angular-lightbox';
 import {NgxSkeletonLoaderModule} from 'ngx-skeleton-loader';
 import {ModalEmailComponent} from './components/modals/modal-email/modal-email.component';

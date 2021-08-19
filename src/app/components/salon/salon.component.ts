@@ -39,18 +39,6 @@ ZoomMtg.prepareJssdk();
   styleUrls: ['./salon.component.css'],
 })
 export class SalonComponent implements OnInit, AfterViewInit {
-  // setup your signature endpoint here: https://github.com/zoom/websdk-sample-signature-node.js
-  signatureEndpoint = 'http://localhost:4000';
-  apiKey = 'HaYBCYciQbC9bYeWM7pnfw';
-
-  role = 0;
-  leaveUrl = 'http://localhost:4200/home';
-  userName = 'Angular test'; // replace with logged in user name
-  userEmail = ''; // replace with logged in user email
-
-  // to store on database  -> exposant meetingNumber + meetingPassword
-  meetingNumber = '8988165963'; // example: exposant1 meeting id
-  meetingPassword = 'T85r69'; // example: exposant1 meeting password
 
   id: any;
   type: any;
@@ -128,92 +116,10 @@ export class SalonComponent implements OnInit, AfterViewInit {
     (document.querySelector('#audioFeo') as HTMLAudioElement).volume = 0.75;
   }
 
-  returnToStandScene() {
-    this.dataService.exposantAssets.next(null);
-    this.dataService.inConference.next(false);
-    this.assetsLoaded = false;
-
-    if (this.unity.actualScene == "Stand") {
-      this.unity.changeScene("Hall");
-    } else {
-      this.unity.changeScene("Stand");
-    }
-  }
-
-  openCommercialListModal() {
-    console.log("open commercial modal")
-  }
-
-  sendAllStandData() {
-    console.log('this.standIdSelected', this.standIdSelected);
-    this.unity.sendAllStandData(this.standIdSelected);
-  }
-
-  sendAllComsId() {
-
-    this.unity.sendAllComsId(this.standIdSelected);
-
-  }
-
-  sendAllVideoUrls() {
-    this.unity.sendAllVideoUrls(this.standIdSelected);
-  }
-
-  sendAllGallerieUrls() {
-    this.unity.sendAllGallerieUrls(this.standIdSelected);
-  }
-
-  sendAllFlyerUrls() {
-    this.unity.sendAllFlyerUrls(this.standIdSelected);
-  }
-
-  sendEmail() {
-    if (this.standIdSelected.includes('-')) this.standIdSelected = (this.standIdSelected as any).replaceAll('-', '')
-    this.dialog.open(ModalEmailComponent, {
-      data: {
-        standIdSelected: this.standIdSelected
-      }
-    });
-  }
-
-  openVideoModal(url) {
-    const videoDiv: any = document.getElementById('dvideo')
-    this.src = url;
-    videoDiv.setAttribute('src', url)
-    this.modal.nativeElement.style.display = 'block';
-    const audioElement: any = document.getElementById('audioFeo')
-    audioElement.pause()
-  }
-
-  closeVideoModal() {
-    const videoDiv: any = document.getElementById('dvideo')
-    if (videoDiv.getAttribute('src')) {
-      videoDiv.pause()
-    }
-    videoDiv.setAttribute('src', '')
-    videoDiv.load();
-    console.log("videoDiv on close", videoDiv.getAttribute('src'));
-    // try to close modal
-    this.src = null;
-    this.modal.nativeElement.style.display = 'none';
-    const audioElement: any = document.getElementById('audioFeo')
-    audioElement.play()
-  }
-
-  openGallerieModal(urls: any) {
-    this.sources = urls;
-    this.modalGallerie.nativeElement.style.display = 'block';
-  }
-
-  closeGallerieModal() {
-    this.modalGallerie.nativeElement.style.display = 'none';
-  }
-
   getValuesFromUnityStandId(): void {
     (window as any).sendToJavascriptStandId = (
       id: any
     ) => {
-      //this.chat.emit("init chat to all", '');
       if (id.includes('-')) id = id.replaceAll('-', '')
       this.standIdSelected = id;
       console.log('this.standIdSelected', this.standIdSelected);
@@ -265,6 +171,7 @@ export class SalonComponent implements OnInit, AfterViewInit {
       data: any
     ) => {
       if (type != "EcranHall") {
+
         if (standId.includes('-')) standId = (standId as any).replaceAll('-', "")
         this.id = standId;
         console.log('data', data);
@@ -335,6 +242,7 @@ export class SalonComponent implements OnInit, AfterViewInit {
             }
           }).afterClosed().subscribe(() => data = null);;
         }
+
         if (type == "PresentoirAccueil") {
           this.dialog.open(ModalHallComponent, {
             data: {
@@ -345,6 +253,7 @@ export class SalonComponent implements OnInit, AfterViewInit {
             }
           }).afterClosed().subscribe(() => data = null);;
         }
+
         if (type == "ComAccueil") {
           this.dialog.open(ModalHallComponent, {
             data: {
@@ -355,7 +264,10 @@ export class SalonComponent implements OnInit, AfterViewInit {
             }
           }).afterClosed().subscribe(() => data = null);;
         }
-      } else {
+      } 
+      
+      else {
+
         if (type == "EcranHall") {
           /* TODO:Asina lien ecran hall TSY AZO ADINO */
           window.open(environment.SERVER_URL + "/public/data/ecran-hall.pdf");
@@ -374,12 +286,14 @@ export class SalonComponent implements OnInit, AfterViewInit {
 
       if (id.includes('-')) id = (id as any).replaceAll('-', '')
       this.id = id;
+
       if (type == 'VideoModal') {
         const selectedStand = this.assets.find(e => e.gameObjectId == id);
         // console.log('Get values again------', selectedStand);
         const newUrl = url.replace('unityvideos', `assets/${selectedStand.room.user_id}`).replace('_1.mp4', '.mp4')
         this.openVideoModal(newUrl);
       }
+
       if (type == 'PdfModal') {
         let splitFlyers = "-[splitFlyerUrl]-";
         let urls = url.split(splitFlyers);
@@ -399,9 +313,8 @@ export class SalonComponent implements OnInit, AfterViewInit {
           panelClass: 'pdfModal'
 
         }).afterClosed().subscribe(() => url = null);
-
-        // window.open(url);
       }
+
       if (type == 'GallerieModal') {
         let splitGallery = '-[splitGallery]-';
         let urls = url.split(splitGallery);
@@ -417,6 +330,7 @@ export class SalonComponent implements OnInit, AfterViewInit {
           panelClass: 'galleryModal'
         }).afterClosed().subscribe(() => url = null);;
       }
+
       if (type == 'CommercialWoman') {
         let stand = undefined
         stand = this.assets.find(e => e.gameObjectId == id)
@@ -432,8 +346,8 @@ export class SalonComponent implements OnInit, AfterViewInit {
             }).afterClosed().subscribe(() => url = null);
           }
         }
-        //this.getSignature(this.meetingNumber, this.meetingPassword);
       }
+
       if (type == 'CommercialMan') {
         let stand = undefined;
         stand = this.assets.find(e => e.gameObjectId == id)
@@ -450,13 +364,9 @@ export class SalonComponent implements OnInit, AfterViewInit {
             }).afterClosed().subscribe(() => url = null);
           }
         }
-        //this.getSignature(this.meetingNumber, this.meetingPassword);
       }
+
       if (type == 'Chat') {
-        // let listComsId = url.split('-[splitComsId]-');
-        // listComsId.forEach((element) => {
-        //   this.listCommercial.push(element)
-        // });
         let selectedStand = undefined
         selectedStand = this.assets.find(e => e.gameObjectId == id)
         console.log('id', id);
@@ -466,6 +376,7 @@ export class SalonComponent implements OnInit, AfterViewInit {
           }
         }).afterClosed().subscribe(() => url = null);
       }
+
       if (type == 'AllStandData') {
         let allDataSplited = url.split('-[splitAllDataType]-');
         let dataArray: string[] = [];
@@ -499,6 +410,7 @@ export class SalonComponent implements OnInit, AfterViewInit {
           }
         }).afterClosed().subscribe(() => url = null);
       }
+
       if (type == 'AllStandVideo') {
         let listVideos = url.split("-[splitVideoUrl]-");
         let videoArray: any[] = [];
@@ -512,6 +424,7 @@ export class SalonComponent implements OnInit, AfterViewInit {
           }
         }).afterClosed().subscribe(() => url = null);;
       }
+
       if (type == 'AllStandGallerie') {
         let splitGallery = '-[splitGallery]-';
         let urls = url.split(splitGallery);
@@ -527,6 +440,7 @@ export class SalonComponent implements OnInit, AfterViewInit {
           panelClass: 'galleryModal'
         }).afterClosed().subscribe(() => url = null);;
       }
+      
       if (type == 'AllStandFlyer') {
         let splitFlyers = "-[splitFlyerUrl]-";
         let urls = url.split(splitFlyers);
@@ -603,63 +517,82 @@ export class SalonComponent implements OnInit, AfterViewInit {
     window.open(url);
   }
 
-  /**
-   *
-   * @param meetingNumber
-   * @param password
-   */
-  getSignature(meetingNumber: string, password: any) {
-    console.log('getting signature......', meetingNumber);
-    this.httpClient
-      .post(this.signatureEndpoint, {
-        meetingNumber: meetingNumber,
-        role: this.role,
-      })
-      .toPromise()
-      .then((data: any) => {
-        if (data.signature) {
-          console.log(data.signature);
-          this.startMeeting(data.signature, meetingNumber, password);
-        } else {
-          console.log(data);
-        }
-      })
-      .catch((error) => {
-        console.log(error);
-      });
+  returnToStandScene() {
+    this.dataService.exposantAssets.next(null);
+    this.dataService.inConference.next(false);
+    this.assetsLoaded = false;
+
+    if (this.unity.actualScene == "Stand") {
+      this.unity.changeScene("Hall");
+    } else {
+      this.unity.changeScene("Stand");
+    }
   }
 
-  /**
-   *
-   * @param signature
-   * @param meetingNumber
-   * @param password
-   */
-  startMeeting(signature: any, meetingNumber: any, password: any) {
-    ZoomMtg.init({
-      leaveUrl: this.leaveUrl,
-      isSupportAV: true,
-      success: (success: any) => {
-        console.log(success);
+  openCommercialListModal() {
+    console.log("open commercial modal")
+  }
 
-        ZoomMtg.join({
-          signature: signature,
-          meetingNumber: meetingNumber,
-          userName: this.userName,
-          apiKey: this.apiKey,
-          userEmail: this.userEmail,
-          passWord: password,
-          success: (success: any) => {
-            console.log(success);
-          },
-          error: (error: any) => {
-            console.log(error);
-          },
-        });
-      },
-      error: (error: any) => {
-        console.log(error);
-      },
+  sendAllStandData() {
+    console.log('this.standIdSelected', this.standIdSelected);
+    this.unity.sendAllStandData(this.standIdSelected);
+  }
+
+  sendAllComsId() {
+    this.unity.sendAllComsId(this.standIdSelected);
+  }
+
+  sendAllVideoUrls() {
+    this.unity.sendAllVideoUrls(this.standIdSelected);
+  }
+
+  sendAllGallerieUrls() {
+    this.unity.sendAllGallerieUrls(this.standIdSelected);
+  }
+
+  sendAllFlyerUrls() {
+    this.unity.sendAllFlyerUrls(this.standIdSelected);
+  }
+
+  sendEmail() {
+    if (this.standIdSelected.includes('-')) this.standIdSelected = (this.standIdSelected as any).replaceAll('-', '')
+    this.dialog.open(ModalEmailComponent, {
+      data: {
+        standIdSelected: this.standIdSelected
+      }
     });
+  }
+
+  openVideoModal(url) {
+    const videoDiv: any = document.getElementById('dvideo')
+    this.src = url;
+    videoDiv.setAttribute('src', url)
+    this.modal.nativeElement.style.display = 'block';
+    const audioElement: any = document.getElementById('audioFeo')
+    audioElement.pause()
+  }
+
+  closeVideoModal() {
+    const videoDiv: any = document.getElementById('dvideo')
+    if (videoDiv.getAttribute('src')) {
+      videoDiv.pause()
+    }
+    videoDiv.setAttribute('src', '')
+    videoDiv.load();
+    console.log("videoDiv on close", videoDiv.getAttribute('src'));
+    // try to close modal
+    this.src = null;
+    this.modal.nativeElement.style.display = 'none';
+    const audioElement: any = document.getElementById('audioFeo')
+    audioElement.play()
+  }
+
+  openGallerieModal(urls: any) {
+    this.sources = urls;
+    this.modalGallerie.nativeElement.style.display = 'block';
+  }
+
+  closeGallerieModal() {
+    this.modalGallerie.nativeElement.style.display = 'none';
   }
 }

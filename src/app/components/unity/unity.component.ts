@@ -1,9 +1,10 @@
 import {Component, ElementRef, Input, OnInit, HostListener} from '@angular/core';
 import {DataService} from 'src/app/services/data.service';
 import { UnityService } from 'src/app/services/unity.service';
+import { Utils } from 'src/app/utils/utils';
 import {StandService} from '../../services/stand.service';
 
-declare var $: any;
+declare let $: any;
 
 @Component({
   selector: 'unity',
@@ -39,9 +40,9 @@ export class UnityComponent implements OnInit {
 
 
   loadWebGL() {
-    var canvas = this.elRef.nativeElement.querySelector("#gameContainer");
-    var buildUrl = "assets/Build";
-    var config = {
+    let canvas = this.elRef.nativeElement.querySelector("#gameContainer");
+    let buildUrl = "assets/Build";
+    let config = {
       dataUrl: buildUrl + "/SalonAlpha.data",
       frameworkUrl: buildUrl + "/SalonAlpha.framework.js",
       codeUrl: buildUrl + "/SalonAlpha.wasm",
@@ -106,7 +107,7 @@ export class UnityComponent implements OnInit {
     (window as any).whenSceneHallReady = () => {
       this.standService.fetchDataHall().subscribe((data: any) => {
         if (data && data.body) {
-          var response = this.dataTreatmentAndSendDataToUnitySceneHall(data.body);
+          let response = this.dataTreatmentAndSendDataToUnitySceneHall(data.body);
           console.log("Hall ready", data.body.length);
           this.loadAllDataToUnityFromBddHallScene(response);
           this.hidden = true;
@@ -183,60 +184,61 @@ export class UnityComponent implements OnInit {
 
   dataTreatmentAndSendDataToUnitySceneHall(data: any) {
     /** TODO: ATAO STATIC DAHOLO DATA HALL PDF RAY ISAKY NY MANDEHA MIANDRY LIEN PDF */
-    var index = 0;
-    var response = "";
-    var responseMarque = "";
-    var responseAccueil = "";
-    var splitStand = "-[splitAllStand]-";
-    var splitType = "-[splitAllType]-";
-    var linkHeader = "https://dashboard.w3dsalonvituelreno2021.fr/";
+    let utils = new Utils();
+    let index = 0;
+    let response = "";
+    let responseMarque = "";
+    let responseAccueil = "";
+    let splitStand = "-[splitAllStand]-";
+    let splitType = "-[splitAllType]-";
+    let linkHeader = "https://dashboard.w3dsalonvituelreno2021.fr/";
 
-    var listLinkAvatarPointFort = ["/assets/hall/FLYER AVATAR - Point Fort Fichet.pdf"];
-    var listLinkAvatarEngie = ["/assets/hall/FLYER AVATAR ENGIE - 1 € DIGITAL.pdf"];
+    let listLinkAvatarPointFort = ["/assets/hall/FLYER AVATAR - Point Fort Fichet.pdf"];
+    let listLinkAvatarEngie = ["/assets/hall/FLYER AVATAR ENGIE - 1 € DIGITAL.pdf"];
 
-    var listLogoAriston = ["/assets/hall/Ar Doc Co Lydos Hybrid 01 2018 BD_1620051238152.pdf"];
-    var listLogoPointFort = ["/assets/hall/Document acceuil PDF Point Fort Fichet  (1).pdf"];
-    var listLogoEngie = ["/assets/hall/Doc accueil Engie - TRAVAUX CEE DIGITAL.pdf"];
-    var listLogoEscalier = ["/assets/hall/Doc acceuil Treppenmeister - Livre des escaliers design2020.pdf"];
+    let listLogoAriston = ["/assets/hall/Ar Doc Co Lydos Hybrid 01 2018 BD_1620051238152.pdf"];
+    let listLogoPointFort = ["/assets/hall/Document acceuil PDF Point Fort Fichet  (1).pdf"];
+    let listLogoEngie = ["/assets/hall/Doc accueil Engie - TRAVAUX CEE DIGITAL.pdf"];
+    let listLogoEscalier = ["/assets/hall/Doc acceuil Treppenmeister - Livre des escaliers design2020.pdf"];
 
-    var listeFlyer: any = [];
+    let listeFlyer: any = [];
     listeFlyer.push(listLogoAriston);
     listeFlyer.push(listLogoPointFort);
     listeFlyer.push(listLogoEngie);
     listeFlyer.push(listLogoEscalier);
 
     for (let i = 0; i < 4; i++) {
-      var item = data[i];
-      // var linkHeader = "";
+      let item = data[i];
+      // let linkHeader = "";
 
-      var company = item.companyName;
+      let company = item.companyName;
 
-      var galleries = item.gallery;
+      let galleries = item.gallery;
 
-      var galleriesUrls = this.galleriesToLongString(galleries, linkHeader);
-      var flyers = this.pdfinksToString(listeFlyer[i], "");
+      let galleriesUrls = utils.galleriesToLongString(galleries, linkHeader);
+      let flyers = utils.pdfinksToString(listeFlyer[i], "");
       console.log("flyers", flyers);
 
-      var mergedData = this.alldataMergeToLongStringSceneHall(item.gameObjectId, galleriesUrls, flyers);
+      let mergedData = utils.alldataMergeToLongStringSceneHall(item.gameObjectId, galleriesUrls, flyers);
 
       if (index == data.length - 1) responseMarque += mergedData;
       else responseMarque += mergedData + splitStand;
     }
-    var item1 = data[1];
-    var galleries1 = item1.gallery;
-    var galleriesUrls1 = this.galleriesToLongString(galleries1, linkHeader);
-    var flyers1 = this.pdfinksToString(listLinkAvatarPointFort, "");
+    let item1 = data[1];
+    let galleries1 = item1.gallery;
+    let galleriesUrls1 = utils.galleriesToLongString(galleries1, linkHeader);
+    let flyers1 = utils.pdfinksToString(listLinkAvatarPointFort, "");
     console.log("flyers1", flyers1);
     
-    var mergedData1 = this.alldataMergeToLongStringSceneHall(item1.gameObjectId, galleriesUrls1, flyers1);
+    let mergedData1 = utils.alldataMergeToLongStringSceneHall(item1.gameObjectId, galleriesUrls1, flyers1);
 
-    var item2 = data[2];
-    var galleries2 = item2.gallery;
-    var galleriesUrls2 = this.galleriesToLongString(galleries2, linkHeader);
-    var flyers2 = this.pdfinksToString(listLinkAvatarEngie, "");
+    let item2 = data[2];
+    let galleries2 = item2.gallery;
+    let galleriesUrls2 = utils.galleriesToLongString(galleries2, linkHeader);
+    let flyers2 = utils.pdfinksToString(listLinkAvatarEngie, "");
     console.log("flyers2", flyers2);
 
-    var mergedData2 = this.alldataMergeToLongStringSceneHall(item2.gameObjectId, galleriesUrls2, flyers2);
+    let mergedData2 = utils.alldataMergeToLongStringSceneHall(item2.gameObjectId, galleriesUrls2, flyers2);
 
     responseAccueil = mergedData1 + splitStand + mergedData2;
     response = responseAccueil + splitType + responseMarque;
@@ -246,17 +248,16 @@ export class UnityComponent implements OnInit {
   }
 
   dataTreatmentAndSendDataToUnity(data: any, unityInstance?: any) {
+    let utils = new Utils();
     data.forEach((item: any) => {
 
-      var linkHeader = "https://dashboard.w3dsalonvituelreno2021.fr/";
+      let linkHeader = "https://dashboard.w3dsalonvituelreno2021.fr/";
 
-      var company = "Empty";
+      let company = "Empty";
       if (item.companyName) company = item.companyName;
 
-      var videoUrlsAndIndex = "Empty";
+      let videoUrlsAndIndex = "Empty";
       if (item.videos && item.videos.length) {
-        // public/data/assets/6058ad843d45c677279e4d41/H495 Réseaux Sociaux_1617287118289.mp4
-        // const videoForUnity = item.videos.map(e => e.url=`public/data/unityvideos/${e.url.split('.mp4')[0].split('/')[e.url.split('.mp4')[0].split('/').length-1]}_1.mp4`)
         const videosV2 = []
         item.videos.forEach(e => {
           videosV2.push({
@@ -265,21 +266,21 @@ export class UnityComponent implements OnInit {
           })
         });
 
-        videoUrlsAndIndex = this.videoUrlsToLongString(videosV2, linkHeader);
+        videoUrlsAndIndex = utils.videoUrlsToLongString(videosV2, linkHeader);
       }
 
-      var galleriesUrls = "Empty";
-      if (item.gallery && item.gallery.length) galleriesUrls = this.galleriesToLongString(item.gallery, linkHeader);
-      var flyers = "Empty";
-      if (item.flyers && item.flyers.length) flyers = this.pdfinksToString(item.flyers, linkHeader);
+      let galleriesUrls = "Empty";
+      if (item.gallery && item.gallery.length) galleriesUrls = utils.galleriesToLongString(item.gallery, linkHeader);
+      let flyers = "Empty";
+      if (item.flyers && item.flyers.length) flyers = utils.pdfinksToString(item.flyers, linkHeader);
 
-      var logo = "Empty";
+      let logo = "Empty";
       if (item.logo) logo = item.logo;
 
-      var commercialIdsAndIndex = "Empty";
-      if (item.commercial && item.commercial.length) commercialIdsAndIndex = this.commercialIdsToLongString(item.commercial);
+      let commercialIdsAndIndex = "Empty";
+      if (item.commercial && item.commercial.length) commercialIdsAndIndex = utils.commercialIdsToLongString(item.commercial);
 
-      var allDataMerged = this.alldataMergeToLongString(item.gameObjectId, videoUrlsAndIndex, galleriesUrls, flyers, company, logo, commercialIdsAndIndex);
+      let allDataMerged = utils.alldataMergeToLongString(item.gameObjectId, videoUrlsAndIndex, galleriesUrls, flyers, company, logo, commercialIdsAndIndex);
 
       if (!unityInstance) this.loadAllDataToUnityFromBdd(item.gameObjectId, allDataMerged);
       else unityInstance.loadAllDataToUnityFromBdd(item.gameObjectId, allDataMerged);
@@ -287,103 +288,13 @@ export class UnityComponent implements OnInit {
   }
 
   dataTreatmentAndSendDataToUnitySceneCoaching(data: any) {
-    var commercials = this.commercialIdsToLongString(data);
+    let utils = new Utils();
+    let commercials = utils.commercialIdsToLongString(data);
     this.loadAllDataToUnityFromBddCoachingScene(commercials);
   }
 
   loadAllDataToUnityFromBddCoachingScene(allDataMerged: any) {
     this.gameInstance.SendMessage('DataLoader', 'LoadAllDataToUnityFromBddSceneCoaching', allDataMerged);
-  }
-
-  pdfinksToString(pdfs: any, linkHeader: any) {
-    var response = "";
-    var splitFlyers = "-[splitFlyerUrl]-";
-    if (pdfs.length > 0) {
-      for (var i = 0; i < pdfs.length; i++) {
-        var link = linkHeader + pdfs[i];
-        if (i == pdfs.length - 1) response += "" + link;
-        else response += "" + link + splitFlyers;
-      }
-    }
-    return response;
-  }
-
-  videoUrlsToLongString(videos: any, linkHeader: any) {
-    var response = "";
-    var allVideoIndex = "";
-    var allVideoUrls = "";
-    var splitUrl = "-[splitVideoUrl]-";
-    var splitNumEcran = "-[splitNumEcran]-";
-    var splitFinal = "-[splitVideosNumUrls]-";
-    if (videos.length > 0) {
-      for (var i = 0; i < videos.length; i++) {
-        var numEcran = videos[i].index;
-        var videoUrl = linkHeader + videos[i].url;
-        if (i == videos.length - 1) {
-          allVideoIndex += "" + numEcran;
-          allVideoUrls += "" + videoUrl;
-        } else {
-          allVideoIndex += "" + numEcran + splitNumEcran;
-          allVideoUrls += "" + videoUrl + splitUrl;
-        }
-      }
-    }
-    response = allVideoIndex + splitFinal + allVideoUrls;
-    return response;
-  }
-
-  commercialIdsToLongString(commercial: any) {
-    var response = "";
-    var allComIndex = "";
-    var allComIds = "";
-    var splitId = "-[splitComId]-";
-    var splitNumCom = "-[splitNumCom]-";
-    var splitFinal = "-[splitComsNumIds]-";
-    if (commercial.length > 0) {
-      for (var i = 0; i < commercial.length; i++) {
-        var numCom = commercial[i].index;
-        if (commercial[i].user_id) {
-          var comId = commercial[i].user_id._id;
-          if (i == commercial.length - 1) {
-            allComIndex += "" + numCom;
-            allComIds += "" + comId;
-          } else {
-            allComIndex += "" + numCom + splitNumCom;
-            allComIds += "" + comId + splitId;
-          }
-        }
-      }
-      response = allComIndex + splitFinal + allComIds;
-    }
-    return response;
-  }
-
-  galleriesToLongString(galleries: any, linkHeader: any) {
-    var response = "";
-    var splitGallery = "-[splitGallery]-";
-    for (var i = 0; i < galleries.length; i++) {
-      var gallerie = linkHeader + "" + galleries[i];
-      if (i == (galleries.length - 1)) {
-        response += "" + gallerie;
-      } else {
-        response += "" + gallerie + splitGallery;
-      }
-    }
-    return response;
-  }
-
-  alldataMergeToLongString(standID: any, videoUrlsAndIndex: any, galleriesUrls: any, flyers: any, companyName: any, logo: any, commercialIdsAndIndex) {
-    var response = ""
-    var splitAllData = "-[splitAllData]-";
-    response = standID + splitAllData + videoUrlsAndIndex + splitAllData + galleriesUrls + splitAllData + flyers + splitAllData + companyName + splitAllData + logo + splitAllData + commercialIdsAndIndex;
-    return response;
-  }
-
-  alldataMergeToLongStringSceneHall(standID: any, galleriesUrls: any, flyers: any) {
-    var response = "";
-    var splitAllData = "-[splitAll]-";
-    response = standID + splitAllData + galleriesUrls + splitAllData + flyers;
-    return response;
   }
 
   loadAllDataToUnityFromBdd(standId: any, allDataMerged: any) {
@@ -411,8 +322,8 @@ export class UnityComponent implements OnInit {
   }
 
   changeVideoEcran(standId: any, videoUrl: any, ecranNum: any) {
-    var split = "-[split]-";
-    var video = videoUrl + "" + split + "" + ecranNum;
+    let split = "-[split]-";
+    let video = videoUrl + "" + split + "" + ecranNum;
     this.gameInstance.SendMessage(standId, 'ChangeVideoEcran', video);
   }
 
@@ -463,5 +374,96 @@ export class UnityComponent implements OnInit {
   playVideoHall(wawa: any) {
     this.gameInstance.SendMessage("HallDataLoader", "PlayVideo", wawa);
   }
+
+  // pdfinksToString(pdfs: any, linkHeader: any) {
+  //   let response = "";
+  //   let splitFlyers = "-[splitFlyerUrl]-";
+  //   if (pdfs.length > 0) {
+  //     for (let i = 0; i < pdfs.length; i++) {
+  //       let link = linkHeader + pdfs[i];
+  //       if (i == pdfs.length - 1) response += "" + link;
+  //       else response += "" + link + splitFlyers;
+  //     }
+  //   }
+  //   return response;
+  // }
+
+  // videoUrlsToLongString(videos: any, linkHeader: any) {
+  //   let response = "";
+  //   let allVideoIndex = "";
+  //   let allVideoUrls = "";
+  //   let splitUrl = "-[splitVideoUrl]-";
+  //   let splitNumEcran = "-[splitNumEcran]-";
+  //   let splitFinal = "-[splitVideosNumUrls]-";
+  //   if (videos.length > 0) {
+  //     for (let i = 0; i < videos.length; i++) {
+  //       let numEcran = videos[i].index;
+  //       let videoUrl = linkHeader + videos[i].url;
+  //       if (i == videos.length - 1) {
+  //         allVideoIndex += "" + numEcran;
+  //         allVideoUrls += "" + videoUrl;
+  //       } else {
+  //         allVideoIndex += "" + numEcran + splitNumEcran;
+  //         allVideoUrls += "" + videoUrl + splitUrl;
+  //       }
+  //     }
+  //   }
+  //   response = allVideoIndex + splitFinal + allVideoUrls;
+  //   return response;
+  // }
+
+  // commercialIdsToLongString(commercial: any) {
+  //   let response = "";
+  //   let allComIndex = "";
+  //   let allComIds = "";
+  //   let splitId = "-[splitComId]-";
+  //   let splitNumCom = "-[splitNumCom]-";
+  //   let splitFinal = "-[splitComsNumIds]-";
+  //   if (commercial.length > 0) {
+  //     for (let i = 0; i < commercial.length; i++) {
+  //       let numCom = commercial[i].index;
+  //       if (commercial[i].user_id) {
+  //         let comId = commercial[i].user_id._id;
+  //         if (i == commercial.length - 1) {
+  //           allComIndex += "" + numCom;
+  //           allComIds += "" + comId;
+  //         } else {
+  //           allComIndex += "" + numCom + splitNumCom;
+  //           allComIds += "" + comId + splitId;
+  //         }
+  //       }
+  //     }
+  //     response = allComIndex + splitFinal + allComIds;
+  //   }
+  //   return response;
+  // }
+
+  // galleriesToLongString(galleries: any, linkHeader: any) {
+  //   let response = "";
+  //   let splitGallery = "-[splitGallery]-";
+  //   for (let i = 0; i < galleries.length; i++) {
+  //     let gallerie = linkHeader + "" + galleries[i];
+  //     if (i == (galleries.length - 1)) {
+  //       response += "" + gallerie;
+  //     } else {
+  //       response += "" + gallerie + splitGallery;
+  //     }
+  //   }
+  //   return response;
+  // }
+
+  // alldataMergeToLongString(standID: any, videoUrlsAndIndex: any, galleriesUrls: any, flyers: any, companyName: any, logo: any, commercialIdsAndIndex) {
+  //   let response = ""
+  //   let splitAllData = "-[splitAllData]-";
+  //   response = standID + splitAllData + videoUrlsAndIndex + splitAllData + galleriesUrls + splitAllData + flyers + splitAllData + companyName + splitAllData + logo + splitAllData + commercialIdsAndIndex;
+  //   return response;
+  // }
+
+  // alldataMergeToLongStringSceneHall(standID: any, galleriesUrls: any, flyers: any) {
+  //   let response = "";
+  //   let splitAllData = "-[splitAll]-";
+  //   response = standID + splitAllData + galleriesUrls + splitAllData + flyers;
+  //   return response;
+  // }
 
 }

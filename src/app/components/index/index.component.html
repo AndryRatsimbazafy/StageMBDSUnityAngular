@@ -1,5 +1,5 @@
 <nav class="navbar navbar-light navbar-expand bg-light navigation-clean">
-  <div class="container"><img class="logo" src="assets/img/logo.png" /></div>
+  <div class="container"><img class="logo" src="assets/img/logo-youngdev.png" /></div>
 </nav>
 <header class="text-center text-white masthead particle container-fluid">
   <div class="overlay">
@@ -10,10 +10,8 @@
     <div class="row">
       <div class="col-xl-7">
         <h1 class="mb-5">
-          <strong>Bienvenue au Salon Virtuel de la</strong
-          ><br />Rénovation<br />
+          <strong>Bienvenue sur le site du Salon Virtuel</strong>
         </h1>
-        <app-timer></app-timer>
       </div>
       <div class="col-xl-5">
         <mat-card class="shadow-lg" style="z-index: 1">
@@ -63,7 +61,7 @@
             <p class="text-danger text-center">
               {{ loginError ? loginError.error : "" }}
             </p>
-            <button mat-button color="accent" (click)="forgotmode = !forgotmode">Mot de passe oublié?</button>
+            <button mat-button color="primary" (click)="forgotmode = !forgotmode">Mot de passe oublié?</button>
           </form>
 
           <!-- FORGET -->
@@ -92,7 +90,7 @@
             <p class="text-danger text-center">
               {{ loginError ? loginError.error : "" }}
             </p>
-            <button mat-button color="accent" (click)="forgotmode = !forgotmode">Se connecter</button>
+            <button mat-button (click)="forgotmode = !forgotmode">Se connecter</button>
           </form>
           <!-- end FORGET -->
 
