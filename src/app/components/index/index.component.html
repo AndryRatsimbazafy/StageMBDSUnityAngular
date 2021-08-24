@@ -1,3 +1,17 @@
+<ng-template #templateSalon>
+  <div class="modal-header">
+    <h4 class="modal-title pull-left">
+      <img src="assets/img/logo-mixte.png" alt="" class="img-fluid ml-auto mr-auto" width="250">
+    </h4>
+    <button type="button" class="close pull-right" aria-label="Close" (click)="modalRef.hide()">
+      <span aria-hidden="true">&times;</span>
+    </button>
+  </div>
+  <div class="modal-body">
+    <app-visite-salon></app-visite-salon>
+  </div>
+</ng-template>
+
 <nav class="navbar navbar-light navbar-expand bg-light navigation-clean">
   <div class="container"><img class="logo" src="assets/img/logo-mixte.png" /></div>
 </nav>
@@ -61,7 +75,8 @@
             <p class="text-danger text-center">
               {{ loginError ? loginError.error : "" }}
             </p>
-            <button mat-button color="primary" (click)="forgotmode = !forgotmode">Mot de passe oublié?</button>
+            <a mat-button color="warm" (click)="openModal(templateSalon)">Pas encore inscrit ?</a>
+            <a mat-button color="primary" (click)="forgotmode = !forgotmode">Mot de passe oublié ?</a>
           </form>
 
           <!-- FORGET -->

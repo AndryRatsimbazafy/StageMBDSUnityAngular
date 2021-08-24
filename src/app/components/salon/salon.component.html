@@ -1,26 +1,6 @@
-<!--<div *ngIf="unity.hidden">-->
-<!--  <div class="row">-->
-<!--    <mat-toolbar class="toolbar">-->
-<!--      <h3 class="ml-1 nav-bar-brand">-->
-<!--        Salon-->
-<!--      </h3>-->
-<!--      <span class="spacer"></span>-->
-
-<!--      <button mat-raised-button class="ml-1" (click)="help()">-->
-<!--        <mat-icon>help_center</mat-icon>-->
-<!--        Aide & FAQ-->
-<!--      </button>-->
-<!--      <button mat-raised-button color="warn" class="ml-1" (click)="logout()">-->
-<!--        <mat-icon class="deconect">logout</mat-icon>-->
-<!--        Déconnexion-->
-<!--      </button>-->
-<!--    </mat-toolbar>-->
-<!--  </div>-->
-<!--</div>-->
-
-<div style="position: absolute;" [ngStyle]="{'visibility': (inConference$|async) ? 'visible' : 'hidden'}">
+<!-- <div style="position: absolute;" [ngStyle]="{'visibility': (inConference$|async) ? 'visible' : 'hidden'}">
   <img src="assets/conference.PNG" style="height: 100vh; width: 100vw;" class="img-fluid" alt="">
-</div>
+</div> -->
 
 <audio src="assets/sound.mp3" id="audioFeo" loop>
 </audio>
@@ -37,7 +17,7 @@
   </i>
 </a>
 
-<a  (click)="logout()" href="#" class="float-2" *ngIf="unity.hidden">
+<a  (click)="logout()" class="float-2" *ngIf="unity.hidden">
   <i class="material-icons my-float">
     logout
   </i>

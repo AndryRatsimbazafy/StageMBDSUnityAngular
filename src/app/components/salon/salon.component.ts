@@ -40,7 +40,6 @@ export class SalonComponent implements OnInit, AfterViewInit {
   url: any;
   standIdSelected: any = "None";
 
-
   @ViewChild('modal') modal: any;
   @ViewChild('close') close: any;
 
@@ -73,7 +72,7 @@ export class SalonComponent implements OnInit, AfterViewInit {
     public router: Router,
     private dataService: DataService,
     private chat: ChatService,
-    private unityService: UnityService
+    private unityService: UnityService,
   ) {
 
   }
@@ -196,35 +195,6 @@ export class SalonComponent implements OnInit, AfterViewInit {
             }
           }).afterClosed().subscribe(() => data = null);;
         }
-
-        /*
-        this.standIdSelected = dataArray[0];
-          if (this.standIdSelected == "StandID1") {
-            let pdflinks1: any[] = [];
-            let pdflinks2: any[] = [];
-            listFlyers.forEach((item) => {
-              if (item.indexOf("Home Services") != -1) pdflinks1.push(this._sanitizer.bypassSecurityTrustResourceUrl(item));
-              else pdflinks2.push(this._sanitizer.bypassSecurityTrustResourceUrl(item));
-            });
-            this.dialog.open(ModalHallEngieComponent, {
-              data: {
-                standID: dataArray[0],
-                engie: pdflinks2,
-                engiHomeService: pdflinks1
-              },
-              panelClass: 'pdfModal'
-            });
-          } else {
-            this.dialog.open(ModalHallComponent, {
-              data: {
-                standId: dataArray[0],
-                listGalleries: gallerieArray,
-                listFlyers: flyerArray,
-                unityComponent: this.unity
-              }
-            });
-          }
-        */
 
         if (type == "ComMarque") {
           this.dialog.open(ModalHallComponent, {

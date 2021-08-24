@@ -1,0 +1,26 @@
+<table>
+    <thead>
+      <th></th>
+      <th width="115px" *ngFor="let coachingDate of coachingDataDates">
+        {{ coachingDate }}
+      </th>
+    </thead>
+    <tbody>
+      <tr *ngFor="let coachingHour of coachingDataHours">
+        <td width="105px">{{ coachingHour }}</td>
+        <td
+          class="input-checkbox"
+          (click)="el.click()"
+          *ngFor="let coachingDate of coachingDataDates"
+        >
+          <input
+            type="checkbox"
+            #el
+            (change)="check(coachingDate, coachingHour, el.checked)"
+            [disabled]="disableCheckbox(coachingDate, coachingHour)"
+          />
+        </td>
+      </tr>
+    </tbody>
+  </table>
+  

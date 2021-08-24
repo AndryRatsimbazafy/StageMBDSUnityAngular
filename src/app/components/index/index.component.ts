@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, TemplateRef } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import { ModalIndexComponent } from '../modals/modal-index/modal-index.component';
 import { Router } from '@angular/router';
@@ -9,6 +9,8 @@ import { DataService } from '../../services/data.service';
 import { TimerService } from '../../services/timer.service';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { NotificationComponent } from '../notification/notification.component';
+import { BsModalRef, BsModalService } from 'ngx-bootstrap/modal';
+import { NgxUiLoaderService } from 'ngx-ui-loader';
 
 declare var particlesJS: any;
 
@@ -27,6 +29,8 @@ export class IndexComponent implements OnInit {
   loginError
   forgotmode = false
 
+  modalRef: BsModalRef;
+
 
   constructor(
     public dialog: MatDialog,
@@ -36,6 +40,8 @@ export class IndexComponent implements OnInit {
     private data: DataService,
     public timerService: TimerService,
     public snackBar: MatSnackBar,
+    private modalService: BsModalService,
+    private ngxLoader: NgxUiLoaderService
   ) {
     this.AccountForm = new FormGroup({
       email: new FormControl('', [Validators.required]),
@@ -52,14 +58,11 @@ export class IndexComponent implements OnInit {
     particlesJS.load('particles-js', 'assets/particles.json', function () {
       console.log('callback - particles.js config loaded');
     });
+  }
 
-    this.timerService.get().subscribe((timer: any) => {
-      // if (timer && timer.body) {
-      //   console.log('timer', timer.body);
-      //   this.data.visitableState.next(-1);
-      //   this.data.timer.next(timer.body);
-      // }
-    })
+  openModal(template: TemplateRef<any>, classValue?: string): void {
+    const  modalClass = classValue ? 'customModal' : 'modal-lg';
+    this.modalRef = this.modalService.show(template, { class: 'modal-lg' });
   }
 
   onCustomAction() {

@@ -1,0 +1,117 @@
+<div class="row">
+    <div class="col-12">
+      <p>
+        Le salon ouvrira ses portes du 12 au 21 mai 2021. L’inscription est gratuite. <br>
+        Afin d’être informé de l’ouverture du salon et recevoir, en amont, le planning des conférences et des coachings gratuits avec les architectes, merci de nous laisser vos coordonnées.
+      </p>
+    </div>
+    <div class="col-12">
+      <form [formGroup]="joinFormGroup" (ngSubmit)="onSubmit()">
+        <div class="form-group">
+          <label for="nom" class="required">Nom</label>
+          <input type="text" class="form form-control" formControlName="lastName" name="nom">
+          <div *ngIf="checkError('lastName', 'required')" class="error-msg">Ce champ est obligatoire</div>
+        </div>
+        <div class="form-group">
+          <label for="prenom" class="required">Prénom</label>
+          <input type="text" class="form form-control" formControlName="firstName" name="prenom">
+          <div *ngIf="checkError('firstName', 'required')" class="error-msg">Ce champ est obligatoire</div>
+        </div>
+        <div class="form-group">
+          <label for="email" class="required">Email</label>
+          <input type="email" class="form form-control" formControlName="email" name="email">
+          <div *ngIf="checkError('email', 'required')" class="error-msg">Ce champ est obligatoire</div>
+          <div *ngIf="checkError('email', 'email')" class="error-msg">Veuillez entrer une adresse email valide</div>
+        </div>
+        <div class="form-group">
+          <label for="phone">Téléphone</label>
+          <input type="text" class="form form-control" formControlName="phoneNumber" name="phone">
+          <div *ngIf="checkError('phoneNumber', 'required')" class="error-msg">Ce champ est obligatoire</div>
+        </div>
+        <div class="form-group">
+          <label for="code_postal" class="required">Code postal</label>
+          <input type="text" class="form form-control" formControlName="postalCode" name="code_postal">
+          <div *ngIf="checkError('postalCode', 'required')" class="error-msg">Ce champ est obligatoire</div>
+        </div>
+        <div class="form-group">
+          <label for="projets">Vous avez un projet de: </label>
+          <div class="ml-5">
+            <div formArrayName="projects" *ngFor="let project of projectsFormArray.controls; let i = index" class="form-group">
+              <input type="checkbox" [formControlName]="i" class="form-check-input">
+              <label for="{{projectsData[i]}}">{{projectsData[i]}}</label>
+            </div>
+          </div>
+          <small id="emailHelp" class="form-text text-muted">Choix multiple possible !</small>
+        </div>
+  
+        <div class="form-group">
+          <div class="ml-4">
+          <input type="checkbox" [(ngModel)]="isConfChecked" [ngModelOptions]="{standalone: true}" (change)="checkConf()" class="form-check-input">
+          <label for="conferences">S'inscrire aux conférences: </label>
+  
+          </div>
+          <div class="ml-5" *ngIf="isConfChecked">
+            <div formArrayName="conferences" *ngFor="let conference of conferenceFormArray.controls; let i = index" class="form-group">
+              <input type="checkbox" [formControlName]="i" class="form-check-input">
+              <label for="{{conferenceData[i]}}">{{conferenceData[i]}}</label>
+            </div>
+            <small id="emailHelp" class="form-text text-muted">Choix multiple possible !</small>
+          </div>
+        </div>
+  
+  <!--      <div class="form-group">-->
+  <!--        <div class="ml-4">-->
+  <!--        <input type="checkbox" [(ngModel)]="isCoachingChecked" [ngModelOptions]="{standalone: true}" (change)="checkCoaching()" class="form-check-input">-->
+  <!--        <label for="coachings">S'inscrire aux coachings: </label>-->
+  
+  <!--        </div>-->
+  <!--        <div class="ml-5 col-sm-12 col-md-8" *ngIf="isCoachingChecked">-->
+  <!--          <div formGroupName="coachings"class="form-group">-->
+  <!--            <label for="coachingDate">Choisir la date:</label>-->
+  <!--            <select class="custom-select" (change)="onDateChange($event.target.value)" formControlName="coachingDate" name="coachingDate">-->
+  <!--              <option *ngFor="let date of coachingDataDates">-->
+  <!--                {{ date }}-->
+  <!--              </option>-->
+  <!--            </select>-->
+  <!--            <label *ngIf="!isLoadingHours" for="coachingHour">Choisir l'heure:</label>-->
+  <!--            <span *ngIf="isLoadingHours">-->
+  <!--              <i class="fa fa-spinner fa-spin"></i>-->
+  <!--            </span>-->
+  <!--            <p *ngIf="!isLoadingHours && displayHours.length <=0">-->
+  <!--                Il n'y plus de créneau  disponible pour cette date-->
+  <!--            </p>-->
+  <!--            <ul *ngIf="!isLoadingHours" class="px-1">-->
+  <!--              <li class="list-group-item" *ngFor="let hour of displayHours">-->
+  <!--                <input type="radio" formControlName="coachingHour" value="{{hour}}" (change)="onHoureChange(hour)">-->
+  <!--                {{ hour }}-->
+  <!--              </li>-->
+  <!--            </ul>-->
+  <!--          </div>-->
+  <!--        </div>-->
+  <!--      </div>-->
+  
+        <p>S'inscrire aux coachings:</p>
+        <app-coaching-date-time
+          [coachingDataDates]="coachingDataDates"
+          [coachingDataHours]="coachingDataHours"
+          [disabledArrayValue]="disabledArrayValue"
+          (valueChanged)="coachings = $event"
+        >
+        </app-coaching-date-time>
+  
+        <p>* Champs obligatoires</p>
+        <div class="alert alert-danger" *ngIf="errorMessage">{{ errorMessage }}</div>
+        <div class="alert alert-success" *ngIf="successMessage">{{ successMessage }}</div>
+        <div class="form-row">
+          <div class="form-group col-12 text-right">
+            <button [disabled]="isSending" type="submit" mat-raised-button
+            >
+              <i *ngIf="isSending" class="fa fa-spinner fa-spin"></i>
+              <span><i *ngIf="!isSending" class="bi bi-cursor-fill"></i> Envoyer</span>
+            </button>
+          </div>
+        </div>
+      </form>
+  
+    </div>
+  </div>  

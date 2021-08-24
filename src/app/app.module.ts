@@ -73,7 +73,6 @@ import { ModalEngieComponent } from './components/modals/modal-engie/modal-engie
 import { ResetPasswordComponent } from './components/reset-password/reset-password.component';
 import { ModalHallEngieComponent } from './components/modals/modal-hall-engie/modal-hall-engie.component';
 import { TobuildComponent } from 'src/app/tobuild/tobuild.component';
-import { ConferenceRedifComponent } from './conference-redif/conference-redif.component';
 import { ModalRediffConferenceComponent } from './components/modals/modal-rediff-conference/modal-rediff-conference.component';
 import { AngularEditorModule } from '@kolkov/angular-editor';
 
@@ -81,10 +80,30 @@ import { AngularEditorModule } from '@kolkov/angular-editor';
 import { UnityService } from './services/unity.service';
 import { ModalZoomComponent } from './components/modals/modal-zoom/modal-zoom.component';
 import { MatSnackBarModule } from '@angular/material/snack-bar';
+import { VisiteSalonComponent } from './components/visite-salon/visite-salon.component';
+import { CoachingDateTimeComponent } from './components/visite-salon/coaching-date-time/coaching-date-time.component';
+
+import {ModalModule} from 'ngx-bootstrap/modal';
+import { NgxUiLoaderModule, NgxUiLoaderConfig,
+  SPINNER,
+  POSITION,
+  PB_DIRECTION, } from 'ngx-ui-loader';
 
 // socket io config
 
 const config: SocketIoConfig = {url: environment.CHAT_SERVER_URL, options: {autoConnect: false}}
+
+const ngxUiLoaderConfig: NgxUiLoaderConfig = {
+  bgsColor: "#C72949",
+  fgsColor: "#C72949",
+  pbColor: "#C72949",
+  bgsPosition: POSITION.bottomRight,
+  bgsSize: 40,
+  bgsType: SPINNER.ballSpinClockwise, // background spinner type
+  fgsType: SPINNER.ballSpinClockwise, // foreground spinner type
+  pbDirection: PB_DIRECTION.leftToRight, // progress bar direction
+  pbThickness: 5, // progress bar thickness
+};
 
 const ChatModalComponents = [
   ChatPanelComponent,
@@ -142,9 +161,10 @@ const MaterialModules = [
     ResetPasswordComponent,
     ModalHallEngieComponent,
     TobuildComponent,
-    ConferenceRedifComponent,
     ModalRediffConferenceComponent,
-    ModalZoomComponent
+    ModalZoomComponent,
+    VisiteSalonComponent,
+    CoachingDateTimeComponent
   ],
   imports: [
     BrowserModule,
@@ -167,7 +187,9 @@ const MaterialModules = [
     MediaChatModule,
     NgxSkeletonLoaderModule,
     CrystalLightboxModule,
-    AngularEditorModule
+    AngularEditorModule,
+    NgxUiLoaderModule.forRoot(ngxUiLoaderConfig),
+    ModalModule.forRoot()
   ],
   providers: [
     {provide: LocationStrategy, useClass: HashLocationStrategy},

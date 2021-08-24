@@ -3,7 +3,6 @@ import { Routes, RouterModule } from '@angular/router';
 import { HomeComponent } from './components/home/home.component';
 import { IndexComponent } from './components/index/index.component';
 import { ResetPasswordComponent } from './components/reset-password/reset-password.component';
-import { ConferenceRedifComponent } from './conference-redif/conference-redif.component';
 import { TobuildComponent } from './tobuild/tobuild.component';
 
 const routes: Routes = [
@@ -12,7 +11,6 @@ const routes: Routes = [
   { path: 'index', component: IndexComponent },
   { path: 'reset-user-password/:token', component: ResetPasswordComponent },
   { path: 'conference-direct', component: TobuildComponent },
-  { path: 'conference-redif', component: ConferenceRedifComponent },
 ];
 
 @NgModule({

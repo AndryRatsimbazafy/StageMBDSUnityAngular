@@ -28,6 +28,14 @@ export class AuthService {
     return this.http.put(`${environment.SERVER_URL}/api/auth/resetpassword`, resetToken, body);
   }
 
+  join(body: any) {
+    return this.http.post<any>(`${environment.SERVER_URL}${'/api/auth/register'}`, body);
+  }
+
+  getCoachings() {
+    return this.http.get<any>(`${environment.SERVER_URL}${'/api/users/coachings'}`)
+  }
+
   storeUserInfo(userId: string, username: string) {
     localStorage.setItem("salon-user-id", userId)
     localStorage.setItem("salon-username", username)

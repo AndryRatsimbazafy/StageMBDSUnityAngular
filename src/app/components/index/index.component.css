@@ -1,13 +1,11 @@
-/* #carousel_f544 {
-    width: 100vw;
-    height: 100vh;
-    background-image: url('/assets/salon.png');
-    background-repeat: no-repeat;
-    background-size: 100% 100%;
-    opacity: 0.65;
-    margin-left: -1%;
-    margin-top: -1%;
-} */
+.modal-body {
+  height: 60vh;
+  overflow-y: scroll;
+}
+
+.customModal .modal-dialog {
+  max-width: 565px;
+}
 
 mat-card {
   width: 436px;
