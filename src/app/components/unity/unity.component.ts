@@ -34,8 +34,8 @@ export class UnityComponent implements OnInit {
 
 
   ngOnInit() {
-    this.loadWebGL();
-    this.getSceneTransitionValues();
+    // this.loadWebGL();
+    // this.getSceneTransitionValues();
   }
 
 
@@ -52,9 +52,7 @@ export class UnityComponent implements OnInit {
     };
 
     (window as any).createUnityInstance(canvas, config, (progress: any) => {
-        console.log('progress', progress)
         this.unityService.progress$.next(Math.round(progress * 100));
-        
     }).then((unityInstance: any) => {
       this.gameInstance = unityInstance;
       this.dataService.unityinstance.next(this.gameInstance)
@@ -170,8 +168,6 @@ export class UnityComponent implements OnInit {
       }
       if (type == "Stand") {
         this.whenSceneStandReady();
-        console.log('whenSceneStandReady');
-        document.getElementById("menu_imagenes").style.display = "flex";
       }
       if (type == "Conference") {
         this.whenSceneConferenceReady();

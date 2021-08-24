@@ -51,14 +51,14 @@ h3 {
 }
 
 .masthead.particle.container-fluid {
-  background: linear-gradient(90deg, #000000, #ffbe88), rgb(255, 255, 255, 1);
+  background: linear-gradient(90deg, #000000, #FD4F05), rgb(255, 255, 255, 1);
   padding-top: 6rem;
   padding-bottom: 4rem;
 }
 
 .card-body {
   height: 190px;
-  background-color: #9F623D;
+  background-color: #e78e56;
 }
 
 .card-body h4 {
@@ -94,7 +94,7 @@ h3 {
 }
 
 .logo {
-  max-width: 150px;
+  max-width: 25em;
   margin-left: auto;
   margin-right: auto;
 }

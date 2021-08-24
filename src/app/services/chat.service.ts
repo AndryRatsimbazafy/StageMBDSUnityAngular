@@ -23,7 +23,6 @@ export class ChatService {
     }
 
     connectSocket(username: string, userID:string) {
-      // console.log("connection service ok..")
       this.socket.ioSocket.io.opts.query = { username, userID }
       this.socket.ioSocket.userID = userID;
       this.socket.connect();

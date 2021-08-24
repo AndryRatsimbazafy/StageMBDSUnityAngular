@@ -18,18 +18,31 @@
 <!--  </div>-->
 <!--</div>-->
 
-<div style="position: absolute;"  [ngStyle]="{'visibility': (inConference$|async) ? 'visible' : 'hidden'}">
+<div style="position: absolute;" [ngStyle]="{'visibility': (inConference$|async) ? 'visible' : 'hidden'}">
   <img src="assets/conference.PNG" style="height: 100vh; width: 100vw;" class="img-fluid" alt="">
 </div>
 
-<audio src="assets/sound.mp3" id="audioFeo" loop >
+<audio src="assets/sound.mp3" id="audioFeo" loop>
 </audio>
 
-<img src="assets/home.png" style="position: absolute; top:0; left: 0; cursor: pointer;" (click)="returnToStandScene()">
+<!-- <img src="assets/home.png" style="position: absolute; top:0; left: 0; cursor: pointer;" (click)="returnToStandScene()"> -->
 
-<button mat-button matTooltip="Se déconnecter" class="map-btn logout" (click)="logout()">
+<!-- <button mat-button matTooltip="Se déconnecter" class="map-btn logout" (click)="logout()">
   <mat-icon>logout</mat-icon>
-</button>
+</button> -->
+
+<a (click)="returnToStandScene()" class="float" *ngIf="unity.hidden">
+  <i class="material-icons my-float" >
+    home
+  </i>
+</a>
+
+<a  (click)="logout()" href="#" class="float-2" *ngIf="unity.hidden">
+  <i class="material-icons my-float">
+    logout
+  </i>
+</a>
+
 <div id="content-unity" class="child-div">
 
   <unity #unity></unity>
@@ -62,98 +75,44 @@
 
 </div>
 
-<p style="display: none">{{ standIdSelected }}</p>
-<div [ngStyle]="{'visibility': standIdSelected === 'None' ? 'hidden' : 'visible'}" class="no-gutters fixed-bottom"
-  id="menu_imagenes">
-  <div class="container">
-    <div class="row">
-      <div class="col text-center" data-toggle="tooltip" data-bss-tooltip="">
-        <a (click)="sendAllComsId()">
-          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 65.33 65.33">
-            <path id="Icon_material-chat" data-name="Icon material-chat"
-              d="M61.8,3H9.533a6.524,6.524,0,0,0-6.5,6.533L3,68.33,16.066,55.264H61.8a6.552,6.552,0,0,0,6.533-6.533V9.533A6.552,6.552,0,0,0,61.8,3ZM16.066,25.865h39.2V32.4h-39.2ZM42.2,42.2H16.066V35.665H42.2ZM55.264,22.6h-39.2V16.066h39.2Z"
-              transform="translate(-3 -3)" fill="#049acb" />
-          </svg>
-        </a>
-        <p>Chat</p>
-      </div>
-      <div class="col text-center" data-toggle="tooltip" data-bss-tooltip="">
-        <a (click)="sendAllComsId()">
-          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 77.034 51.356">
-            <path id="Icon_awesome-video" data-name="Icon awesome-video"
-              d="M44.963,4.5H6.393A6.393,6.393,0,0,0,0,10.893V49.463a6.393,6.393,0,0,0,6.393,6.393H44.963a6.393,6.393,0,0,0,6.393-6.393V10.893A6.393,6.393,0,0,0,44.963,4.5Zm25.33,5.042L55.636,19.653V40.7L70.294,50.8a4.288,4.288,0,0,0,6.74-3.45V12.992A4.29,4.29,0,0,0,70.294,9.542Z"
-              transform="translate(0 -4.5)" fill="#049acb" />
-          </svg>
-        </a>
-        <p>Visio</p>
-      </div>
-      <div class="col text-center" data-toggle="tooltip" data-bss-tooltip="">
-        <a (click)="sendEmail()">
-          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64.195 51.356">
-            <path id="Icon_metro-mail" data-name="Icon metro-mail"
-              d="M62.917,7.712H11.561a6.39,6.39,0,0,0-6.387,6.419L5.141,52.649a6.418,6.418,0,0,0,6.419,6.419H62.917a6.418,6.418,0,0,0,6.419-6.419V14.132a6.418,6.418,0,0,0-6.419-6.419Zm0,12.839L37.239,36.6,11.561,20.551v-6.42L37.239,30.18,62.917,14.132v6.419Z"
-              transform="translate(-5.141 -7.712)" fill="#049acb" />
-          </svg>
-        </a>
-        <p>E-mail</p>
-      </div>
-      <div class="col text-center" data-toggle="tooltip" data-bss-tooltip="">
-        <!--    <a (click)="sendAllVideoUrls()">-->
-        <!--      -->
-        <!--    </a>-->
-        <div class="dropup">
-          <button type="button" class="dropdown-toggle" data-toggle="dropdown" aria-haspopup="true"
-            aria-expanded="false">
-            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 68.475 51.356">
-              <path id="Icon_awesome-folder" data-name="Icon awesome-folder"
-                d="M62.055,13.059H36.377L27.818,4.5H6.42A6.419,6.419,0,0,0,0,10.92V49.437a6.419,6.419,0,0,0,6.42,6.42H62.055a6.419,6.419,0,0,0,6.42-6.42V19.479A6.419,6.419,0,0,0,62.055,13.059Z"
-                transform="translate(0 -4.5)" fill="#049acb" />
-            </svg>
-          </button>
-          <p>Fichiers</p>
-          <div class="dropdown-menu shadow">
-            <ul>
-              <li class="col">
-                <a (click)="sendAllFlyerUrls()">
-                  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 43.109 57.479">
-                    <path id="Icon_awesome-file" data-name="Icon awesome-file"
-                      d="M25.147,15.268V0H2.694A2.688,2.688,0,0,0,0,2.694V54.785a2.688,2.688,0,0,0,2.694,2.694H40.415a2.688,2.688,0,0,0,2.694-2.694V17.962H27.842A2.7,2.7,0,0,1,25.147,15.268ZM43.11,13.685v.685H28.74V0h.685a2.692,2.692,0,0,1,1.908.786l10.991,11A2.686,2.686,0,0,1,43.11,13.685Z"
-                      fill="#8b8b8b" />
-                  </svg>
-                </a>
-                <p>Documents</p>
-              </li>
-              <li class="col">
-                <a (click)="sendAllGallerieUrls()">
-                  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 43.109 57.479">
-                    <path id="Icon_awesome-file-image" data-name="Icon awesome-file-image"
-                      d="M43.11,13.69v.68H28.74V0h.68a2.694,2.694,0,0,1,1.905.789l11,11A2.7,2.7,0,0,1,43.11,13.69ZM27.842,17.962a2.7,2.7,0,0,1-2.694-2.694V0H2.694A2.694,2.694,0,0,0,0,2.694V54.785a2.694,2.694,0,0,0,2.694,2.694H40.415a2.694,2.694,0,0,0,2.694-2.694V17.962Zm-15.207,1.8a5.389,5.389,0,1,1-5.389,5.389A5.389,5.389,0,0,1,12.635,19.759ZM35.986,46.7H7.246L7.3,41.259l4.436-4.436a1.284,1.284,0,0,1,1.851.054l4.436,4.436L29.645,29.692a1.347,1.347,0,0,1,1.905,0l4.436,4.436Z"
-                      fill="#8b8b8b" />
-                  </svg>
-                </a>
-                <p>Images</p>
-              </li>
-              <li class="col">
-                <a (click)="sendAllVideoUrls()">
-                  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 43.109 57.479">
-                    <path id="Icon_awesome-file-video" data-name="Icon awesome-file-video"
-                      d="M43.11,13.69v.68H28.74V0h.68a2.7,2.7,0,0,1,1.905.789l11,11a2.7,2.7,0,0,1,.789,1.905ZM25.147,15.268V0H2.694A2.694,2.694,0,0,0,0,2.694V54.785a2.694,2.694,0,0,0,2.694,2.694H40.415a2.694,2.694,0,0,0,2.694-2.694V17.962H27.842A2.7,2.7,0,0,1,25.147,15.268ZM35.925,31.436V44.005a2.7,2.7,0,0,1-4.6,1.905l-6.178-6.176v4.273A2.694,2.694,0,0,1,22.453,46.7H9.879a2.694,2.694,0,0,1-2.694-2.694V31.434A2.694,2.694,0,0,1,9.879,28.74H22.453a2.694,2.694,0,0,1,2.694,2.694v4.273l6.178-6.176A2.7,2.7,0,0,1,35.925,31.436Z"
-                      fill="#8b8b8b" />
-                  </svg>
-                </a>
-                <p>Videos</p>
-              </li>
-            </ul>
-          </div>
-        </div>
-      </div>
+<div [ngStyle]="{'visibility': standIdSelected === 'None' ? 'hidden' : 'visible'}" class="FABMenu">
+  <input type="checkbox" />
+  <div class="hamburger">
+    <div class="dots">
+      <span class="first"></span>
+      <span class="second"></span>
+      <span class="third"></span>
+    </div>
+  </div>
+  <div class="action_items_bar">
+    <div class="action_items">
+      <span class="first_item">
+        <i class="material-icons" (click)="sendAllComsId()">
+          question_answer
+        </i>
+      </span>
+      <span class="second_item" (click)="sendAllVideoUrls()">
+        <i class="material-icons">
+          ondemand_video
+        </i>
+      </span>
+      <span class="third_item">
+        <i class="material-icons" (click)="sendAllGallerieUrls()">
+          collections
+        </i>
+      </span>
+      <span class="fourth_item">
+        <i class="material-icons" (click)="sendAllFlyerUrls()">
+          picture_as_pdf
+        </i>
+      </span>
     </div>
   </div>
 </div>
 
 <section class="sceneLoading" *ngIf="!unity.hidden">
   <nav class="navbar navbar-light navbar-expand bg-light navigation-clean">
-    <div class="container"><img class="logo" src="assets/img/logo.png"></div>
+    <div class="container"><img class="logo" src="assets/img/logo-mixte.png"></div>
   </nav>
   <header class="text-center text-white masthead particle container-fluid">
     <div class="overlay">
@@ -163,13 +122,72 @@
     <div class="container contentLogin">
       <div class="row">
         <div class="col-xl-12">
-          <h1 class="mb-12"><strong>Bienvenue au Salon Virtuel de la</strong><br />Rénovation<br />
-            chargement en cours, veuillez patienter
+          <h1 class="mb-12"><strong>Bienvenue au Salon Virtuel</strong>
+            chargement en cours {{ progress }} % , veuillez patienter
           </h1>
+          <div class="container">
+            <div class="row" style="margin-left: 0 !important;">
+              <div class="col-lg-4">
+                <div class="card tips">
+                  <div class="content-mouse">
+                    <img src="assets/img/icons8-left-click-100.png" />
+                  </div>
+                  <div class="card-body d-flex flex-column">
+                    <div>
+                      <h4 style="
+                  font-family: 'Source Sans Pro', sans-serif;
+                  font-weight: 700;
+                ">
+                        <strong>DÉPLACEMENT ET INTERACTION</strong><br />
+                      </h4>
+                      <p>Cliquez le bouton gauche de votre souris</p>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div class="col-lg-4">
+                <div class="card tips">
+                  <div class="content-mouse">
+                    <img src="assets/img/icons8-mouse-100.png" />
+                  </div>
+                  <div class="card-body d-flex flex-column">
+                    <div>
+                      <h4 style="
+                  font-family: 'Source Sans Pro', sans-serif;
+                  font-weight: 700;
+                ">
+                        <strong>MOUVEMENT</strong><br /><strong>DE CAMERA</strong><br />
+                      </h4>
+                      <p>Bougez votre souris de bas en haut ou de gauche à droite</p>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div class="col-lg-4">
+                <div class="card tips">
+                  <div class="content-mouse">
+                    <img src="assets/img/icons8-mouse-right-click-100.png" />
+                  </div>
+                  <div class="card-body d-flex flex-column">
+                    <div>
+                      <h4 style="
+                  font-family: 'Source Sans Pro', sans-serif;
+                  font-weight: 700;
+                ">
+                        <strong>VEROUILLAGE ET DEVEROUILLAGE CAMERA</strong><br />
+                      </h4>
+                      <p>Cliquez sur le bouton droit de votre souris</p>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
         </div>
-        <div class="col-xl-12" style="display: flex; justify-content: center;">
-          <app-load-data-progress-spinner *ngIf="!unity.hidden"></app-load-data-progress-spinner>
-        </div>
+      </div>
+      
+      <div class="col-xl-12" style="display: flex; justify-content: center;">
+        <app-load-data-progress-spinner *ngIf="!unity.hidden"></app-load-data-progress-spinner>
       </div>
     </div>
   </header>

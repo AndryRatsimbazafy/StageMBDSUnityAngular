@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
+import { environment } from 'src/environments/environment';
 
 @Injectable({
   providedIn: 'root'
@@ -12,14 +13,14 @@ export class StandService {
   fetchDataApiServer() {
     return this.httpClient
       .get(
-        "https://dashboard.w3dsalonvituelreno2021.fr/api/unity/assets"
+        `${environment.SERVER_URL}/api/unity/assets`
       );
   }
 
   getUserById(id) {
     return this.httpClient
       .get(
-        "https://dashboard.w3dsalonvituelreno2021.fr/api/unity/exposant/" + id
+        `${environment.SERVER_URL}/api/unity/exposant/${id}`
       );
   }
 
@@ -27,7 +28,7 @@ export class StandService {
   sendUserDataApiServer(gameObjectId: any, visitorId: any) {
     return this.httpClient
       .post(
-        "https://dashboard.w3dsalonvituelreno2021.fr/api/rooms/visitors",
+        `${environment.SERVER_URL}/api/rooms/visitors`,
         { gameObjectId, visitorId }
       );
   }
@@ -35,14 +36,14 @@ export class StandService {
   fetchDataHall() {
     return this.httpClient
       .get(
-        "https://dashboard.w3dsalonvituelreno2021.fr/api/unity/hall"
+        `${environment.SERVER_URL}/api/unity/hall`
       );
   }
 
   fetchDataCoaching() {
     return this.httpClient
       .get(
-        "https://dashboard.w3dsalonvituelreno2021.fr/api/unity/coach"
+        `${environment.SERVER_URL}/api/unity/coach`
       );
   }
 

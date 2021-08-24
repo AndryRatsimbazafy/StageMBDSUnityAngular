@@ -2,16 +2,12 @@ import { AfterViewInit, Component, ElementRef, HostListener, Input, OnInit, View
 import { UnityComponent } from '../unity/unity.component';
 import { DomSanitizer } from '@angular/platform-browser';
 import { MatDialog } from '@angular/material/dialog';
-import { ModalVideoComponent } from '../modals/modal-video/modal-video.component';
 import { ModalPdfComponent } from '../modals/modal-pdf/modal-pdf.component';
 import { StandService } from '../../services/stand.service';
 import { ModalGalleryComponent } from '../modals/modal-gallery/modal-gallery.component';
 import { ModalLogoutComponent } from '../modals/modal-logout/modal-logout.component';
 import { ModalHelpComponent } from '../modals/modal-help/modal-help.component';
 import { HttpClient } from '@angular/common/http';
-import { DOCUMENT } from '@angular/common';
-
-import { ZoomMtg } from '@zoomus/websdk';
 import { ModalChatComponent } from '../modals/modal-chat/modal-chat.component';
 import { AuthService } from 'src/app/services/auth.service';
 import { Router } from '@angular/router';
@@ -28,10 +24,9 @@ import { ModalEngieComponent } from "../modals/modal-engie/modal-engie.component
 import { ModalHallEngieComponent } from '../modals/modal-hall-engie/modal-hall-engie.component';
 import { environment } from 'src/environments/environment';
 import { Observable } from 'rxjs';
+import { UnityService } from 'src/app/services/unity.service';
 
 declare let particlesJS: any;
-ZoomMtg.preLoadWasm();
-ZoomMtg.prepareJssdk();
 
 @Component({
   selector: 'app-salon',
@@ -43,7 +38,7 @@ export class SalonComponent implements OnInit, AfterViewInit {
   id: any;
   type: any;
   url: any;
-  standIdSelected: any = undefined;
+  standIdSelected: any = "None";
 
 
   @ViewChild('modal') modal: any;
@@ -66,6 +61,8 @@ export class SalonComponent implements OnInit, AfterViewInit {
 
   inConference$: Observable<boolean>;
 
+  public progress = 0;
+
   constructor(
     private _sanitizer: DomSanitizer,
     public dialog: MatDialog,
@@ -75,13 +72,14 @@ export class SalonComponent implements OnInit, AfterViewInit {
     private auth: AuthService,
     public router: Router,
     private dataService: DataService,
-    private chat: ChatService
+    private chat: ChatService,
+    private unityService: UnityService
   ) {
 
   }
 
   ngOnInit() {
-
+    this.unityService.progress$.subscribe((progress: number) => this.progress = progress);
     this.inConference$ = this.dataService.inConference;
     this.dataService.exposantAssets.subscribe(assets => {
       if (assets && !this.assetsLoaded) {
@@ -101,8 +99,6 @@ export class SalonComponent implements OnInit, AfterViewInit {
     });
 
     this.dataService.playBackgroundAudio.subscribe(e => {
-      console.log('PLAY MUSIC MMMMMMMMMM', e);
-
       const audioElement: any = document.getElementById('audioFeo')
       if (e) {
         audioElement.play()
@@ -136,7 +132,6 @@ export class SalonComponent implements OnInit, AfterViewInit {
       type: string,
       data: any
     ) => {
-      console.log('DATAAAAAAAAAAAAAAAA', data, type);
       if (type == 'CommercialMan') {
         this.dialog.open(ModalChatComponent, {
           data: {
@@ -157,7 +152,6 @@ export class SalonComponent implements OnInit, AfterViewInit {
   getValuesFromUnityConference(): void {
     (window as any).sendToJavascriptSceneConference = () => {
       const modal = this.dialog.open(ModalChoixConferenceComponent);
-      // this.inConference = true;
       modal.afterClosed().subscribe(() => {
         // this.dataService.inConference.next(false);
       });
@@ -490,8 +484,6 @@ export class SalonComponent implements OnInit, AfterViewInit {
     const dialogRef = this.dialog.open(ModalLogoutComponent);
 
     dialogRef.afterClosed().subscribe(res => {
-      console.log("log value", res)
-
       if (res && res == "yes") {
         const userID = { _id: this.auth.getUserId() }
         console.log("log user out")

@@ -1,5 +1,6 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
+import { environment } from 'src/environments/environment';
 
 @Injectable({
   providedIn: 'root'
@@ -12,7 +13,7 @@ export class MailService {
   sendEmail(mail: any) {
     return this.httpClient
       .post(
-        "https://dashboard.w3dsalonvituelreno2021.fr/api/users/sendEmail",
+        `${environment.SERVER_URL}/api/users/sendEmail`,
         mail
       );
   }

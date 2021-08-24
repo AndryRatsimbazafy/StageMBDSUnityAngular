@@ -1,5 +1,6 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
+import { environment } from 'src/environments/environment';
 
 @Injectable({
   providedIn: 'root'
@@ -12,7 +13,7 @@ export class TimerService {
   get() {
     return this.httpClient
       .get(
-        "https://dashboard.w3dsalonvituelreno2021.fr/api/unity/timer"
+        `${environment.SERVER_URL}/api/unity/timer`
       );
   }
 }
