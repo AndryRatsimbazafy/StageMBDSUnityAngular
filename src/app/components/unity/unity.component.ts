@@ -34,8 +34,8 @@ export class UnityComponent implements OnInit {
 
 
   ngOnInit() {
-    // this.loadWebGL();
-    // this.getSceneTransitionValues();
+    this.loadWebGL();
+    this.getSceneTransitionValues();
   }
 
 

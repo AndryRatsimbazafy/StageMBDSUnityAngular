@@ -4,6 +4,7 @@ import { AuthService } from 'src/app/services/auth.service';
 import { ChatService } from 'src/app/services/chat.service';
 import { DataService } from 'src/app/services/data.service';
 import { TimerService } from 'src/app/services/timer.service';
+import { NgxUiLoaderService } from 'ngx-ui-loader';
 
 @Component({
   selector: 'app-home',
@@ -19,11 +20,12 @@ export class HomeComponent implements OnInit {
     private data: DataService,
     public timerService: TimerService,
     private router: Router,
-    private chat: ChatService
+    private chat: ChatService,
+    private ngxLoader: NgxUiLoaderService
   ) { }
 
   ngOnInit(): void {
-
+    this.ngxLoader.start();
     if (!this.auth.getUserId()) {
       this.router.navigate(['/index']);
     } else {
@@ -31,6 +33,10 @@ export class HomeComponent implements OnInit {
     }
     this.youCanLoadUnity = true
 
+  }
+
+  ngAfterViewInit(){
+    this.ngxLoader.stop();
   }
 
 }

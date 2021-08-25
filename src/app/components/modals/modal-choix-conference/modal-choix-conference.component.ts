@@ -39,7 +39,7 @@ export class ModalChoixConferenceComponent implements OnInit {
     */
     this.dataService.inConference.next(true);
     this.dialogRef.close();
-    const modal = this.dialog.open(ModalZoomComponent, { height: "70%", width: "100%", position: {top: "10px" }});
+    const modal = this.dialog.open(ModalZoomComponent, { height: "95vh", width: "100%", position: {top: "10px" }});
     modal.afterClosed().subscribe(() => {
       // this.dataService.inConference.next(false);
     })
